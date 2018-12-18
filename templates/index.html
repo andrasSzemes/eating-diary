@@ -18,7 +18,12 @@
             </div>
         </div>
         <div class="note-body">
-            <p>{{ note.body }}</p>
+            {% set body = note.body.split('\n') %}
+            {% for line in body %}
+                {% if line|length > 1 %}
+                    <li>{{ line }}</li>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 {% endfor %}

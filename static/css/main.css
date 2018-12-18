@@ -36,6 +36,10 @@ body {
     border-color: #FCE1E4;
 }
 
+.note-header p {
+    font-size: medium;
+}
+
 #note-header-input {
     background-color: #FFFDC9;
     padding: 10px 5px;
@@ -70,6 +74,10 @@ body {
     text-align: left;
     margin-top: 90px;
     transform: translate(0, -50%);
+}
+
+.note-body li {
+    margin: 8px 0;
 }
 
 #note-body-input {
