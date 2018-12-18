@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="vertical-space"></div>
+<div id="add-note"><a href="{{ url_for('add_note') }}"><img src="/static/add_note.png" id="add-note-icon" draggable="false"></a></div>
+{% for note in all_notes %}
+    <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}">
+        <div class="note-header">
+            <a href="/delete-note/{{ note.id }}"><img src="/static/remove-icon.png" id="remove-icon" draggable="false"></a>
+            <p>{{ note.header }}</p>
+            <div class="note-counter importance{{ note.importance }}">
+                <a href="/up-vote/{{ note.id }}">
+                    <img src="/static/blue-arrow.png" id="up-arrow" draggable="false" {{ "hidden" if note.importance > 2 }}>
+                </a>
+                <a href="/down-vote/{{ note.id }}">
+                    <img src="/static/blue-arrow.png" id="down-arrow" draggable="false" {{ "hidden" if note.importance < 1 }}>
+                </a>
+            </div>
+        </div>
+        <div class="note-body">
+            <p>{{ note.body }}</p>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

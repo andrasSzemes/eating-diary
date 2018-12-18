@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form>
+    <button type="submit" formmethod="post" class="not-buttom"><img id='plus-icon' src="/static/plus_icon.png" draggable="false"></button>
+    <div class="note-format-add">
+        <div class="note-header">
+            <p><textarea name='header' id="note-header-input" autocomplete="off" required autofocus></textarea></p>
+            <div class="note-counter">
+                <img src="/static/blue-arrow.png" id="up-arrow" draggable="false">
+                0
+                <img src="/static/blue-arrow.png" id="down-arrow" draggable="false">
+            </div>
+        </div>
+        <div class="note-body">
+            <textarea name='body' id="note-body-input" autocomplete="off"></textarea>
+        </div>
+    </div>
+</form>
+{% endblock %}
