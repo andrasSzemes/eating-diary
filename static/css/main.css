@@ -6,7 +6,7 @@ body {
 .note-format {
     margin-left: 50%;
     margin-top: 20px;
-    transform: translate(-200px,-150px);
+    transform: translate(-200px,-150px) skewX(-1.5deg);
     height: 270px;
     width: 400px;
     background-color: #FFFEE3;
@@ -255,6 +255,10 @@ body {
     100% {
         transform: rotate(-360deg);
     }
+}
+
+.skew-right {
+    transform: skewX(-3deg);
 }
 
 /* http://paletton.com/#uid=31O0X0kalJm3vSk6PO1dQEAhaAa */
