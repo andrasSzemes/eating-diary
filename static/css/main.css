@@ -43,16 +43,18 @@ body {
 #note-header-input {
     background-color: #FFFDC9;
     padding: 10px 5px;
-    margin-top: 4px;
-    height: 58px;
+    height: 38px;
     width: 346px;
-    position: relative;
     border-top-left-radius: 15px;
     border-style: dashed;
     border-width: 0;
     border-bottom-width: 2px;
     border-color: #FCE1E4;
     font-size: medium;
+    position: absolute;
+    transform: translate(0, -50%);
+    margin-top: -30px;
+    margin-left: 4px;
 }
 
 #note-header-input:focus {
@@ -73,7 +75,18 @@ body {
     padding: 10px;
     text-align: left;
     margin-top: 90px;
-    transform: translate(0, -50%);
+    transform: translate(0, -45%);
+    overflow: auto;
+    height: 170px;
+}
+
+.note-body-new {
+    padding: 10px;
+    text-align: left;
+    margin-top: 90px;
+    transform: translate(0, -35%);
+    overflow: auto;
+    height: 340px;
 }
 
 .note-body li {
@@ -85,7 +98,7 @@ body {
     padding: 10px 5px;
     margin: 0;
     margin-left: -10px;
-    margin-top: 40px;
+    transform: translate(0,40px);
     height: 200px;
     width: 390px;
     position: relative;
@@ -151,17 +164,16 @@ body {
 
 #plus-icon {
     position: absolute;
-    margin-left: 50%;
-    margin-top: 210px;
-    height: 75px;
-    transform: translate(-290px,0);
+    margin-top: 0px;
+    height: 70px;
+    transform: translate(-80px,0);
 }
 
 #remove-icon {
     transition-duration: 0.8s;
     opacity: 0;
     margin-left: -50px;
-    margin-top: 15px;
+    margin-top: -10px;
     position: absolute;
     height: 50px;
 }
@@ -170,12 +182,13 @@ body {
     transition-duration: 1.5s;
     opacity: 1;
     margin-left: -50px;
-    margin-top: 15px;
+    margin-top: 5px;
     position: absolute;
     height: 50px;
 }
 
 .not-buttom {
+    position: absolute;
     background-color: transparent; /* Green */
     border: none;
     color: white;
@@ -212,6 +225,36 @@ body {
 
 .importance3 {
     background-color: #F67281;
+}
+
+#refresh-icon {
+    position: absolute;
+    height: 80px;
+    margin-top: 120px;
+    margin-left: 400px;
+    opacity: 0;
+    transition-duration: 0.25s;
+    cursor: default;
+}
+
+#refresh-icon:hover {
+    opacity: 0.8;
+    transition-duration: 0.3s;
+    cursor: default;
+}
+
+.circle {
+    animation-name: circle;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+}
+
+@keyframes circle {
+    100% {
+        transform: rotate(-360deg);
+    }
 }
 
 /* http://paletton.com/#uid=31O0X0kalJm3vSk6PO1dQEAhaAa */

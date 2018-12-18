@@ -41,3 +41,25 @@ def vote(cursor, note_id, change):
                     WHERE id = %(note_id)s
                     """,
                    {'change': change, 'note_id': note_id})
+
+
+@connection.connection_handler
+def update_note(cursor, note_to_update):
+    cursor.execute("""
+                    UPDATE notes
+                    SET body = %(body)s, header = %(header)s
+                    WHERE id = %(note_id)s
+                    """,
+                   note_to_update)
+
+
+@connection.connection_handler
+def get_note_by_id(cursor, note_id):
+    print(note_id)
+    cursor.execute("""
+                    SELECT id, header, body, importance
+                    FROM notes
+                    WHERE id = %(note_id)s
+                    """,
+                   {'note_id': note_id})
+    return cursor.fetchone()

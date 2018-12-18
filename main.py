@@ -38,6 +38,16 @@ def down_vote(note_id):
     return redirect(url_for("index"))
 
 
+@app.route('/update-note/<note_id>', methods=['GET', 'POST'])
+def update_note(note_id):
+    if request.method == 'POST':
+        note_to_update = request.form.to_dict()
+        data_manager.update_note(note_to_update)
+        return redirect(url_for("index"))
+    else:
+        selected_note = data_manager.get_note_by_id(note_id)
+        return render_template('add_note.html', selected_note=selected_note)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

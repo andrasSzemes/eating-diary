@@ -2,18 +2,15 @@
 
 {% block content %}
 <form>
-    <button type="submit" formmethod="post" class="not-buttom"><img id='plus-icon' src="/static/plus_icon.png" draggable="false"></button>
+    <input name="note_id" value="{{ selected_note.id if selected_note }}" hidden>
     <div class="note-format-add">
+        <button type="submit" formmethod="post" class="not-buttom">a<img id='plus-icon' src="/static/plus_icon.png" draggable="false"></button>
         <div class="note-header">
-            <p><textarea name='header' id="note-header-input" autocomplete="off" required autofocus></textarea></p>
-            <div class="note-counter">
-                <img src="/static/blue-arrow.png" id="up-arrow" draggable="false">
-                0
-                <img src="/static/blue-arrow.png" id="down-arrow" draggable="false">
-            </div>
+            <div class="note-counter importance{{ selected_note.importance if selected_note }}"></div>
+            <textarea name='header' id="note-header-input" autocomplete="off" required autofocus>{{ selected_note.header if selected_note }}</textarea>
         </div>
-        <div class="note-body">
-            <textarea name='body' id="note-body-input" autocomplete="off"></textarea>
+        <div class="note-body-new">
+            <textarea name='body' id="note-body-input" autocomplete="off">{{ selected_note.body if selected_note }}</textarea>
         </div>
     </div>
 </form>
