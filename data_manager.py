@@ -15,12 +15,14 @@ def save_note(cursor, new_note):
 
 
 @connection.connection_handler
-def get_all_notes(cursor):
+def get_all_notes(cursor, note_class):
     cursor.execute("""
                     SELECT id, header, body, submission_time, importance
                     FROM notes
+                    WHERE class = %(note_class)s
                     ORDER BY submission_time DESC;
-                    """)
+                    """,
+                   {'note_class': note_class})
     return cursor.fetchall()
 
 
@@ -55,7 +57,6 @@ def update_note(cursor, note_to_update):
 
 @connection.connection_handler
 def get_note_by_id(cursor, note_id):
-    print(note_id)
     cursor.execute("""
                     SELECT id, header, body, importance
                     FROM notes
@@ -63,3 +64,16 @@ def get_note_by_id(cursor, note_id):
                     """,
                    {'note_id': note_id})
     return cursor.fetchone()
+
+
+@connection.connection_handler
+def get_all_classes(cursor):
+    cursor.execute("""
+                    SELECT DISTINCT class
+                    FROM notes
+                    """)
+    classes = []
+    for fetched_dict in cursor.fetchall():
+        classes.append(fetched_dict['class'])
+
+    return classes

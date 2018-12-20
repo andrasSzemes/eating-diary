@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import data_manager
 
 app = Flask(__name__)
@@ -6,8 +6,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    all_notes = data_manager.get_all_notes()
-    return render_template('index.html', all_notes=all_notes)
+    note_classes = data_manager.get_all_classes()
+    all_notes = data_manager.get_all_notes(session['note_class'])
+    return render_template('index.html', all_notes=all_notes, note_classes=note_classes)
 
 
 @app.route('/add-note', methods=['GET', 'POST'])
@@ -49,5 +50,12 @@ def update_note(note_id):
         return render_template('add_note.html', selected_note=selected_note)
 
 
+@app.route('/change-class/<note_class>')
+def change_class(note_class):
+    session['note_class'] = note_class
+    return redirect(url_for("index"))
+
+
 if __name__ == '__main__':
+    app.secret_key = 'the_one_to_rule_them_all'
     app.run(debug=True)

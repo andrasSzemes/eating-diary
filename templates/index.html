@@ -2,10 +2,20 @@
 
 {% block content %}
 <div class="vertical-space"></div>
+<div id="place-for-card-classes">
+    {% for note_class in note_classes%}
+        <a href="/change-class/{{ note_class }}">
+            <div class="resize-card">
+                <img src="/static/card_class.png" class="card-class-image">
+                <p>{{ note_class }}</p>
+            </div>
+        </a>
+    {% endfor %}
+</div>
 <div id="add-note"><a href="{{ url_for('add_note') }}"><img src="/static/add_note.png" id="add-note-icon" draggable="false"></a></div>
 {% for note in all_notes %}
-    <form>
-        <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}">
+    <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}">
+        <form>
             <div class="note-header">
                 <a href="/delete-note/{{ note.id }}"><img src="/static/remove-icon.png" id="remove-icon" draggable="false"></a>
                 <a href="/update-note/{{ note.id }}"><img src="/static/refresh.png" id="refresh-icon" class="circle" draggable="false"></a>
@@ -29,7 +39,7 @@
                     {% endfor %}
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 {% endfor %}
 {% endblock %}
