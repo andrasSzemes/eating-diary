@@ -15,6 +15,7 @@ def index():
 def add_note():
     if request.method == 'POST':
         new_note = request.form.to_dict()
+        new_note['class_id'] = data_manager.get_class_id_by_name(session['note_class'])
         data_manager.save_note(new_note)
         return redirect(url_for("index"))
     else:
@@ -54,6 +55,16 @@ def update_note(note_id):
 def change_class(note_class):
     session['note_class'] = note_class
     return redirect(url_for("index"))
+
+
+@app.route('/add-new-class', methods=['GET', 'POST'])
+def add_new_class():
+    if request.method == 'POST':
+        data_manager.save_new_class(request.form['new_class'])
+        return redirect(url_for("index"))
+    else:
+        note_classes = data_manager.get_all_classes()
+        return render_template('add_class.html', note_classes=note_classes)
 
 
 if __name__ == '__main__':

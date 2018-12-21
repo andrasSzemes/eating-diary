@@ -8,8 +8,8 @@ import connection
 def save_note(cursor, new_note):
     cursor.execute("""
                     INSERT INTO notes
-                    (header, body)
-                    VALUES (%(header)s, %(body)s);
+                    (header, body, class_id)
+                    VALUES (%(header)s, %(body)s, %(class_id)s);
                     """,
                     new_note)
 
@@ -17,9 +17,11 @@ def save_note(cursor, new_note):
 @connection.connection_handler
 def get_all_notes(cursor, note_class):
     cursor.execute("""
-                    SELECT id, header, body, submission_time, importance
+                    SELECT notes.id, notes.header, notes.body, notes.submission_time, notes.importance, classes.class_id
                     FROM notes
-                    WHERE class = %(note_class)s
+                    JOIN classes
+                        ON notes.class_id = classes.class_id
+                    WHERE classes.class_name = %(note_class)s
                     ORDER BY submission_time DESC;
                     """,
                    {'note_class': note_class})
@@ -69,11 +71,32 @@ def get_note_by_id(cursor, note_id):
 @connection.connection_handler
 def get_all_classes(cursor):
     cursor.execute("""
-                    SELECT DISTINCT class
-                    FROM notes
+                    SELECT class_name
+                    FROM classes
                     """)
     classes = []
     for fetched_dict in cursor.fetchall():
-        classes.append(fetched_dict['class'])
+        classes.append(fetched_dict['class_name'])
 
     return classes
+
+
+@connection.connection_handler
+def save_new_class(cursor, new_class):
+    cursor.execute("""
+                    INSERT INTO classes
+                    (class_name)
+                    VALUES (%(new_class)s)
+                    """,
+                   {'new_class': new_class})
+
+
+@connection.connection_handler
+def get_class_id_by_name(cursor, class_name):
+    cursor.execute("""
+                    SELECT class_id
+                    FROM classes
+                    WHERE class_name = %(class_name)s
+                    """,
+                   {'class_name': class_name})
+    return cursor.fetchone()['class_id']

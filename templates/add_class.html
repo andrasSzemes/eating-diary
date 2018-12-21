@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="vertical-space"></div>
+    <div class="place-for-card-classes pull-back-to-top">
+        {% for note_class in note_classes%}
+            <a href="/change-class/{{ note_class }}">
+                <div class="resize-card">
+                    <img src="/static/card_class.png" class="card-class-image" draggable="false">
+                    <p>{{ note_class }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <div class="centralise-new-class-img">
+        <form>
+            <img src="/static/card_class_add.png" draggable="false" id="add-new-class-img">
+            <input id="input-new-class-name" name="new_class" placeholder="Write HERE new class's name" required autocomplete="off" autofocus>
+            <button type="submit" formmethod="post" formaction="{{ url_for('add_new_class') }}" class="save-new-class">
+                <img src="/static/plus_icon.png" style="height: 80px">
+            </button>
+        </form>
+    </div>
+{% endblock %}
