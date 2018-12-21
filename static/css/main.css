@@ -96,18 +96,29 @@ body {
     color: #5f5f5f;
 }
 
+.place-for-cards {
+    margin-top: -150px;
+    left: 50%;
+    margin-left: -200px;
+}
+
 .note-format {
+    position: absolute;
     opacity: 0;
-    margin-left: 50%;
     margin-top: 20px;
-    transform: translate(-200px,-150px) skewX(-1.5deg);
+    transform: skewX(-1.5deg);
     height: 270px;
     width: 400px;
-    background-color: #FFFEE3;
-    border-radius: 15px;
     animation-name: appear;
     animation-fill-mode: forwards;
     animation-duration: 0.1s;
+    transition-duration: 0.3s;
+}
+
+.note-format:hover {
+    padding-left: 500px;
+    transition-duration: 0.3s;
+    filter: brightness(100%);
 }
 
 @keyframes appear {
@@ -187,10 +198,13 @@ body {
 .note-body {
     padding: 10px;
     text-align: left;
-    margin-top: 90px;
+    margin-top: 85px;
     transform: translate(0, -45%);
     overflow: auto;
     height: 170px;
+    background-color: #FFFEE3;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .note-body-new {
@@ -200,6 +214,7 @@ body {
     transform: translate(0, -35%);
     overflow: auto;
     height: 340px;
+    background-color: #FFFEE3;
 }
 
 .note-body li {
@@ -318,11 +333,12 @@ body {
 }
 
 .move-left {
-    margin-left: 40%;
+    margin-left: 400px;
 }
 
 .move-right {
-    margin-left: 44%;
+    margin-left: 405px;
+    filter: brightness(94%);
 }
 
 .importance0 {
