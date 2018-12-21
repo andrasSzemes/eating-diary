@@ -15,7 +15,7 @@
 </div>
 <div id="add-note"><a href="{{ url_for('add_note') }}"><img src="/static/add_note.png" id="add-note-icon" draggable="false"></a></div>
 {% for note in all_notes %}
-    <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}">
+    <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}" style="animation-delay: {{ loop.index / 10 }}s">
         <form>
             <div class="note-header">
                 <a href="/delete-note/{{ note.id }}"><img src="/static/remove-icon.png" id="remove-icon" draggable="false"></a>

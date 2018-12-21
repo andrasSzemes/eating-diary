@@ -97,6 +97,7 @@ body {
 }
 
 .note-format {
+    opacity: 0;
     margin-left: 50%;
     margin-top: 20px;
     transform: translate(-200px,-150px) skewX(-1.5deg);
@@ -104,6 +105,15 @@ body {
     width: 400px;
     background-color: #FFFEE3;
     border-radius: 15px;
+    animation-name: appear;
+    animation-fill-mode: forwards;
+    animation-duration: 0.1s;
+}
+
+@keyframes appear {
+    20% {opacity: 0.2}
+    50% {opacity: 0.4}
+    100% {opacity: 1;}
 }
 
 .note-format-add {
