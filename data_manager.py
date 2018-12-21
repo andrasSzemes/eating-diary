@@ -3,6 +3,8 @@ from typing import List, Dict
 from psycopg2.extras import RealDictCursor
 
 import connection
+from time import strftime
+import os
 
 @connection.connection_handler
 def save_note(cursor, new_note):
@@ -100,3 +102,32 @@ def get_class_id_by_name(cursor, class_name):
                     """,
                    {'class_name': class_name})
     return cursor.fetchone()['class_id']
+
+
+@connection.connection_handler
+def backup(cursor):
+    #get a list of all currently available table in the database
+    cursor.execute("""
+                    SELECT table_name
+                    FROM information_schema.tables
+                    WHERE table_schema='public'
+                    """)
+    tables = []
+    for fetched_dict in cursor.fetchall():
+        tables.append(fetched_dict['table_name'])
+
+    #save all table separately in csv files with actual date
+    PATH = os.getcwd()
+
+    try:
+        os.mkdir(PATH + '/back_up')
+    except FileExistsError:
+        pass
+
+    for table in tables:
+        cursor.execute(f"""
+                        COPY {table}
+                        TO '{PATH}/back_up/{table}{strftime(" %a, %d %b %Y %H:%M:%S")}.csv'
+                        DELIMITER ','
+                        CSV HEADER;
+                        """)

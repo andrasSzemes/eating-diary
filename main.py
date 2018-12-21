@@ -67,6 +67,12 @@ def add_new_class():
         return render_template('add_class.html', note_classes=note_classes)
 
 
+@app.route('/back-up')
+def back_up():
+    data_manager.backup()
+    return redirect(url_for("index"))
+
+
 if __name__ == '__main__':
     app.secret_key = 'the_one_to_rule_them_all'
     app.run(debug=True)
