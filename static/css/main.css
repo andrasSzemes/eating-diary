@@ -76,6 +76,7 @@
     transform: scale(0.8,0.8);
     transition-timing-function: linear;
     transition-delay: 0.1s;
+    user-select: none;
 }
 
 .resize-card:hover {
@@ -415,6 +416,7 @@ textarea {
     font-weight: 100;
     transform: skewX(-3deg);
     opacity: 0.7;
+    user-select: none;
 }
 
 /* http://paletton.com/#uid=31O0X0kalJm3vSk6PO1dQEAhaAa */

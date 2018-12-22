@@ -7,12 +7,12 @@
     {% for note_class in note_classes%}
         <a href="/change-class/{{ note_class }}">
             <div class="resize-card">
-                <img src="/static/card_class.png" class="card-class-image">
+                <img src="/static/card_class.png" class="card-class-image" draggable="false">
                 <p>{{ note_class }}</p>
             </div>
         </a>
     {% endfor %}
-    <a href="{{ url_for('add_new_class') }}"><img src="/static/plus_icon.png" id="add-new-class-icon"></a>
+    <a href="{{ url_for('add_new_class') }}"><img src="/static/plus_icon.png" id="add-new-class-icon" draggable="false"></a>
 </div>
 <div id="up-hider"></div>
 <div id="down-hider"></div>

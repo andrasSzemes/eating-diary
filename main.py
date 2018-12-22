@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     note_classes = data_manager.get_all_classes()
-    all_notes = data_manager.get_all_notes(session['note_class'])
+    all_notes = data_manager.get_all_notes(session['note_class']) if 'note_class' in session else ''
     return render_template('index.html', all_notes=all_notes, note_classes=note_classes)
 
 
