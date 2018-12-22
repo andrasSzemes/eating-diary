@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="vertical-space"></div>
+<h1 id="topics">Topics</h1>
 <div class="place-for-card-classes">
     {% for note_class in note_classes%}
         <a href="/change-class/{{ note_class }}">
@@ -13,6 +14,8 @@
     {% endfor %}
     <a href="{{ url_for('add_new_class') }}"><img src="/static/plus_icon.png" id="add-new-class-icon"></a>
 </div>
+<div id="up-hider"></div>
+<div id="down-hider"></div>
 <div id="add-note"><a href="{{ url_for('add_note') }}"><img src="/static/add_note.png" id="add-note-icon" draggable="false"></a></div>
 <div class="place-for-cards">
     {% for note in all_notes %}
@@ -34,10 +37,18 @@
                 <div class="note-body">
                     {% set body = note.body.split('\n') %}
                     <div contenteditable="true" name="new_body">
-                        {% for line in body %}
-                            {% if line|length > 1 %}
-                                <li>{{ line }}</li>
-                            {% endif %}
+                        {% for line in body if line|length > 1 %}
+                            {% if line[:1] == '!' %}
+                                {% if line[1:5] == '    ' %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ line[1:] }}<br>
+                                {% else %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{{ line[1:] }}<br>
+                                {% endif %}
+                            {% else %}
+                                <li style={{"margin-bottom:0px" if line[0] == '-' else '' }}>
+                                    {{ line[1:] if line[0] == '-' else line }}
+                                </li>
+                            {% endif%}
                         {% endfor %}
                     </div>
                 </div>

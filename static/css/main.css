@@ -1,12 +1,27 @@
 .place-for-card-classes {
     position: fixed;
-    margin: -30px 0;
+    margin: 0px 0;
     width: 120px;
     height: 280px;
     overflow: auto;
     padding-bottom: 30px;
     overflow-x:hidden;
     transition-duration: 1s;
+}
+
+#up-hider {
+    position: fixed;
+    width: 240px;
+    height: 20px;
+    background-image: linear-gradient(to top, transparent, #D1DAE8);
+}
+
+#down-hider {
+    position: fixed;
+    width: 240px;
+    height: 20px;
+    top: 360px;
+    background-image: linear-gradient(to bottom, transparent, #D1DAE8);
 }
 
 .place-for-card-classes:hover {
@@ -391,6 +406,15 @@ a {
 
 textarea {
     resize: none;
+}
+
+#topics {
+    position: absolute;
+    margin-top: -45px;
+    margin-left: 7px;
+    font-weight: 100;
+    transform: skewX(-3deg);
+    opacity: 0.7;
 }
 
 /* http://paletton.com/#uid=31O0X0kalJm3vSk6PO1dQEAhaAa */
