@@ -16,6 +16,11 @@
 </div>
 <div id="up-hider"></div>
 <div id="down-hider"></div>
+<a href="{{ url_for('count_pomodoro') }}">
+    <h1 id="pomodoro_today" align="center" data-hover="+ 1 More^?!">
+        <span>{{ session['pomodoro_count'] }} <span class="pomodoro_red">Pomodoro^</span><br><br>Done^ Today^</span>
+    </h1>
+</a>
 <div id="add-note"><a href="{{ url_for('add_note') }}"><img src="/static/add_note.png" id="add-note-icon" draggable="false"></a></div>
 <div class="place-for-cards">
     {% for note in all_notes %}

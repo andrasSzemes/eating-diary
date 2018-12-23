@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    session['pomodoro_count'] = data_manager.pomodoro_count_today()
     note_classes = data_manager.get_all_classes()
     all_notes = data_manager.get_all_notes(session['note_class']) if 'note_class' in session else ''
     return render_template('index.html', all_notes=all_notes, note_classes=note_classes)
@@ -65,6 +66,13 @@ def add_new_class():
     else:
         note_classes = data_manager.get_all_classes()
         return render_template('add_class.html', note_classes=note_classes)
+
+
+@app.route('/count-pomodoro')
+def count_pomodoro():
+    topic = session['note_class']
+    data_manager.archive_pomodoro(topic)
+    return redirect(url_for("index"))
 
 
 @app.route('/back-up')

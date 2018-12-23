@@ -131,3 +131,26 @@ def backup(cursor):
                         DELIMITER ','
                         CSV HEADER;
                         """)
+
+
+@connection.connection_handler
+def archive_pomodoro(cursor, topic):
+    cursor.execute("""
+                    INSERT INTO pomodoro
+                    (topic)
+                    VALUES (%(topic)s)
+                    """,
+                   {'topic': topic})
+
+
+@connection.connection_handler
+def pomodoro_count_today(cursor):
+    cursor.execute("""
+                    SELECT count(*) AS pomodoros_today
+                    FROM pomodoro
+                    WHERE EXTRACT(YEAR FROM done_date) = EXTRACT(YEAR FROM now()) AND
+                          EXTRACT(MONTH FROM done_date) = EXTRACT(MONTH FROM now()) AND
+                          EXTRACT(DAY FROM done_date) = EXTRACT(DAY FROM now())
+                    """)
+
+    return cursor.fetchone()['pomodoros_today']

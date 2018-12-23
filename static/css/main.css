@@ -103,6 +103,50 @@ body {
 }
 /* ↑ Index page: left side bar ↑ */
 
+.pomodoro_red {
+    color: #DC7992;
+    filter: brightness(80%);
+}
+
+#pomodoro_today {
+    position: fixed;
+    margin-top: 510px;
+    margin-left: -35px;
+    font-weight: 400;
+    transform: skewX(-3deg) scale(0.6,0.6);
+    opacity: 0.7;
+    user-select: none;
+    font-family: clementine_sketch;
+}
+
+#pomodoro_today span {
+    transition: 0.6s;
+    transition-delay: 0.2s;
+}
+
+#pomodoro_today:before {
+    color: #DC7992;
+    filter: brightness(80%);
+    position: absolute;
+    padding-top: 35px;
+    padding-left: 25px;
+    opacity: 0;
+    transition: .4s,opacity .6s;
+    content: attr(data-hover);
+    transform: translate(-150%,0);
+}
+
+#pomodoro_today:hover:before {
+    opacity: 1;
+    transform: translate(0,0);
+    transition-delay: .4s;
+}
+
+#pomodoro_today:hover span {
+    opacity: 0;
+    transform: scale(0.3);
+}
+
 #input-new-class-name {
     background-color: inherit;
     border-width: 0;
