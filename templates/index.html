@@ -5,7 +5,7 @@
 <div class="place-for-card-classes-background"></div>
 <div class="place-for-card-classes">
     {% for note_class in note_classes%}
-        <div class="topic" style="transform: rotate({{loop.index % 5 * 2}}deg)">
+        <div id={{ "actual_topic" if note_class == session['note_class'] else None }} class="topic" style="transform: rotate({{loop.index % 5 * 2}}deg)">
             <a href="/change-class/{{ note_class }}">
                 <img src="/static/cimke.png" draggable="false" class="topic-img">
                 <p>{{ note_class }}</p>
