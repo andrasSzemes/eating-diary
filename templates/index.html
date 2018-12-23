@@ -1,16 +1,16 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="vertical-space"></div>
-<h1 id="topics">Topics</h1>
+<h1 id="topics">Topics^</h1>
+<div class="place-for-card-classes-background"></div>
 <div class="place-for-card-classes">
     {% for note_class in note_classes%}
-        <a href="/change-class/{{ note_class }}">
-            <div class="resize-card">
-                <img src="/static/card_class.png" class="card-class-image" draggable="false">
+        <div class="topic" style="transform: rotate({{loop.index % 5 * 2}}deg)">
+            <a href="/change-class/{{ note_class }}">
+                <img src="/static/cimke.png" draggable="false" class="topic-img">
                 <p>{{ note_class }}</p>
-            </div>
-        </a>
+            </a>
+        </div>
     {% endfor %}
     <a href="{{ url_for('add_new_class') }}"><img src="/static/plus_icon.png" id="add-new-class-icon" draggable="false"></a>
 </div>
