@@ -9,6 +9,7 @@ body {
     background-position: center;
     background-size: cover;
     background-color: #d8bea5;
+    margin-top: 165px;
 }
 
 /* ↓ Index page: left side bar ↓ */
@@ -18,7 +19,7 @@ body {
     margin-left: 21px;
     font-weight: 400;
     transform: skewX(-3deg);
-    opacity: 0.7;
+    opacity: 0.85;
     user-select: none;
     font-family: clementine_sketch;
 }
@@ -145,6 +146,28 @@ body {
 #pomodoro_today:hover span {
     opacity: 0;
     transform: scale(0.3);
+}
+
+#zero-card-message {
+    width: -webkit-fill-available;
+    position: fixed;
+    top: 30%;
+    margin-left: 160px;
+    font-family: clementine_sketch;
+}
+
+#zero-card-message div {
+    width: max-content;
+    transform: scale(1.6);
+    padding: 15px 0;
+    user-select: none;
+    transition-duration: 0.2s;
+    margin: 0 auto;
+}
+
+#zero-card-message div:hover {
+    transform: scale(1.65);
+    transition-duration: 0.2s;
 }
 
 #input-new-class-name {
@@ -360,6 +383,7 @@ body {
 }
 
 #add-note {
+    position: fixed;
     margin-top: 20px;
     margin-left: 100%;
     transform: translate(-115px,0);

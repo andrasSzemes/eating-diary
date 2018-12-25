@@ -75,6 +75,7 @@ def get_all_classes(cursor):
     cursor.execute("""
                     SELECT class_name
                     FROM classes
+                    ORDER BY class_id DESC
                     """)
     classes = []
     for fetched_dict in cursor.fetchall():

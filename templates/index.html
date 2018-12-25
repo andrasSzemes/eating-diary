@@ -21,7 +21,12 @@
         <span>{{ session['pomodoro_count'] }} <span class="pomodoro_red">Pomodoro^</span><br><br>Done^ Today^</span>
     </h1>
 </a>
-<div id="add-note"><a href="{{ url_for('add_note') }}"><img src="/static/add_note.png" id="add-note-icon" draggable="false"></a></div>
+<div id="zero-card-message" {{ 'hidden' if all_notes|length > 0 }}>
+    <a href="{{ url_for('add_note') }}">
+        <div>Click^ Here^ To^<br><br>Add^ First^ Note^</div>
+    </a>
+</div>
+<div id="add-note" {{ 'hidden' if all_notes|length == 0 }}><a href="{{ url_for('add_note') }}"><img src="/static/add_note.png" id="add-note-icon" draggable="false"></a></div>
 <div class="place-for-cards">
     {% for note in all_notes %}
         <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}" style="animation-delay: {{ loop.index / 10 }}s; margin-top: {{ loop.index * 70}}px">
