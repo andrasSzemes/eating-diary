@@ -115,7 +115,7 @@ body {
     margin-left: -35px;
     font-weight: 400;
     transform: skewX(-3deg) scale(0.6,0.6);
-    opacity: 0.7;
+    opacity: 0.85;
     user-select: none;
     font-family: clementine_sketch;
 }
@@ -378,15 +378,28 @@ body {
     transition-duration: 0.25s;
 }
 
-#add-note-icon {
-    width: 100px;
+#add-new-note {
+    width: -webkit-fill-available;
+    position: fixed;
+    top: 30%;
+    margin-left: 650px;
+    font-family: clementine_sketch;
 }
 
-#add-note {
-    position: fixed;
-    margin-top: 20px;
-    margin-left: 100%;
-    transform: translate(-115px,0);
+#add-new-note div {
+    width: max-content;
+    transform: scale(1.6);
+    padding: 15px 0;
+    user-select: none;
+    transition-duration: 0.2s;
+    margin: 0 auto;
+    opacity: 0.5;
+}
+
+#add-new-note div:hover {
+    transform: scale(1.65);
+    transition-duration: 0.2s;
+    opacity: 1;
 }
 
 #plus-icon {
@@ -433,7 +446,7 @@ body {
 
 .move-right {
     margin-left: 405px;
-    filter: brightness(94%);
+    filter: brightness(95%);
 }
 
 .importance0 {
