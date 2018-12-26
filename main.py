@@ -83,4 +83,5 @@ def back_up():
 
 if __name__ == '__main__':
     app.secret_key = 'the_one_to_rule_them_all'
-    app.run(debug=True)
+    app.run(port=4000,
+            debug=True)

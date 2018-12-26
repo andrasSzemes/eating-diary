@@ -1,39 +1,43 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h1 id="topics">Topics^</h1>
-<div class="place-for-card-classes-background"></div>
-<div class="place-for-card-classes">
-    {% for note_class in note_classes%}
-        <div id={{ "actual_topic" if note_class == session['note_class'] else None }} class="topic" style="transform: rotate({{loop.index % 5 * 2}}deg)">
-            <a href="/change-class/{{ note_class }}">
-                <img src="/static/cimke.png" draggable="false" class="topic-img">
-                <p>{{ note_class }}</p>
-            </a>
-        </div>
-    {% endfor %}
-    <a href="{{ url_for('add_new_class') }}"><img src="/static/plus_icon.png" id="add-new-class-icon" draggable="false"></a>
-</div>
-<div id="up-hider"></div>
-<div id="down-hider"></div>
-<a href="{{ url_for('count_pomodoro') }}">
-    <h1 id="pomodoro_today" align="center" data-hover="+ 1 More^?!">
-        <span>{{ session['pomodoro_count'] }} <span class="pomodoro_red">Pomodoro^</span><br><br>Done^ Today^</span>
-    </h1>
-</a>
-<div id="zero-card-message" {{ 'hidden' if all_notes|length > 0 }}>
-    <a href="{{ url_for('add_note') }}">
-        <div>Click^ Here^ To^<br><br>Add^ First^ Note^</div>
+<button onclick="left_side_bar_open()" style="margin-left: 500px; background-color: red">OPEN</button>
+<button onclick="left_side_bar_close()" style="background-color: red">CLOSE</button>
+<div id="left-side-bar-closed">
+    <h1 id="left-side-bar-header-closed" class="header">Topics^</h1>
+    <div class="place-for-card-classes-background"></div>
+    <div class="place-for-card-classes-closed">
+        {% for note_class in note_classes%}
+            <div id={{ "actual_topic" if note_class == session['note_class'] else None }} class="topic" style="transform: rotate({{loop.index % 5 * 2 - 1}}deg)">
+                <a href="/change-class/{{ note_class }}">
+                    <img src="/static/cimke.png" draggable="false" class="topic-tag">
+                    <p>{{ note_class }}</p>
+                </a>
+            </div>
+        {% endfor %}
+        <a href="{{ url_for('add_new_class') }}"><img src="/static/plus_icon.png" id="add-new-class-icon" draggable="false"></a>
+    </div>
+    <div id="up-fade-closed"></div>
+    <div id="down-fade-closed"></div>
+    <a href="{{ url_for('count_pomodoro') }}">
+        <h2 id="pomodoro-today-closed" align="center" data-hover="+ 1 More^?!">
+            <span>{{ session['pomodoro_count'] }} <span class="pomodoro-red">Pomodoro^</span><br><br>Done^ Today^</span>
+        </h2>
     </a>
+</div>
+<div id="zero-card-message" {{ 'hidden' if all_notes|length > 0 }}>
+    <div>
+        <a href="{{ url_for('add_note') }}">Click^ Here^ To^<br><br>Add^ First^ Note^</a>
+    </div>
 </div>
 <div id="add-new-note" {{ 'hidden' if all_notes|length == 0 }}>
     <a href="{{ url_for('add_note') }}">
         <div>Add^ Ne^w^ Note^</div>
     </a>
 </div>
-<div class="place-for-cards">
+<div class="place-for-notes" {{ 'hidden' if all_notes|length == 0 }}>
     {% for note in all_notes %}
-        <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}" style="animation-delay: {{ loop.index / 10 }}s; margin-top: {{ loop.index * 70}}px">
+        <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}" style="animation-delay: {{ loop.index / 500 }}s; margin-top: {{ (loop.index - 1) * 70}}px">
             <form>
                 <div class="note-header">
                     <a href="/delete-note/{{ note.id }}"><img src="/static/remove-icon.png" id="remove-icon" draggable="false"></a>

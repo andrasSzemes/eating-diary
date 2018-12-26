@@ -7,8 +7,36 @@
     <link rel="icon" href="/static/card_class.png">
 </head>
 <body>
-<div>
     {% block content %} {% endblock %}
-</div>
 </body>
+<script>
+    function left_side_bar_open() {
+        var leftSideBarClosed = document.getElementById("left-side-bar-closed");
+        leftSideBarClosed.classList.add("left-side-bar-open");
+        var leftSideBarHeaderClosed = document.getElementById("left-side-bar-header-closed");
+        leftSideBarHeaderClosed.classList.add("left-side-bar-header-open");
+        var placeForCardClassesClosed = document.getElementsByClassName("place-for-card-classes-closed");
+        placeForCardClassesClosed[0].classList.add("place-for-card-classes-open");
+        var upFadeClosed = document.getElementById("up-fade-closed");
+        upFadeClosed.classList.add("up-fade-open");
+        var downFadeClosed = document.getElementById("down-fade-closed");
+        downFadeClosed.classList.add("down-fade-open");
+        var pomodoroTodayClosed = document.getElementById("pomodoro-today-closed");
+        pomodoroTodayClosed.classList.add("pomodoro-today-open");
+    }
+    function left_side_bar_close() {
+        var leftSideBarClosed = document.getElementById("left-side-bar-closed");
+        leftSideBarClosed.classList.remove("left-side-bar-open");
+        var leftSideBarHeaderClosed = document.getElementById("left-side-bar-header-closed");
+        leftSideBarHeaderClosed.classList.remove("left-side-bar-header-open");
+        var placeForCardClassesClosed = document.getElementsByClassName("place-for-card-classes-closed");
+        placeForCardClassesClosed[0].classList.remove("place-for-card-classes-open");
+        var upFadeClosed = document.getElementById("up-fade-closed");
+        upFadeClosed.classList.remove("up-fade-open");
+        var downFadeClosed = document.getElementById("down-fade-closed");
+        downFadeClosed.classList.remove("down-fade-open");
+        var pomodoroTodayClosed = document.getElementById("pomodoro-today-closed");
+        pomodoroTodayClosed.classList.remove("pomodoro-today-open");
+    }
+</script>
 </html>
