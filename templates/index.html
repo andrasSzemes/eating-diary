@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<button onclick="left_side_bar_open()" style="margin-left: 500px; background-color: red">OPEN</button>
-<button onclick="left_side_bar_close()" style="background-color: red">CLOSE</button>
 <div id="left-side-bar-closed">
     <h1 id="left-side-bar-header-closed" class="header">Topics^</h1>
     <div class="place-for-card-classes-background"></div>
@@ -25,6 +23,8 @@
         </h2>
     </a>
 </div>
+<button id="bar-opener" onclick="left_side_bar_open()"><div>Your^&nbsp;Topics^</div></button>
+<button id="bar-closer" onclick="left_side_bar_close()"></button>
 <div id="zero-card-message" {{ 'hidden' if all_notes|length > 0 }}>
     <div>
         <a href="{{ url_for('add_note') }}">Click^ Here^ To^<br><br>Add^ First^ Note^</a>

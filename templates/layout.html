@@ -23,6 +23,10 @@
         downFadeClosed.classList.add("down-fade-open");
         var pomodoroTodayClosed = document.getElementById("pomodoro-today-closed");
         pomodoroTodayClosed.classList.add("pomodoro-today-open");
+        var barOpener = document.getElementById("bar-opener");
+        barOpener.classList.add("bar-opener-hide");
+        var barCloser = document.getElementById("bar-closer");
+        barCloser.classList.add("bar-closer-appear");
     }
     function left_side_bar_close() {
         var leftSideBarClosed = document.getElementById("left-side-bar-closed");
@@ -37,6 +41,10 @@
         downFadeClosed.classList.remove("down-fade-open");
         var pomodoroTodayClosed = document.getElementById("pomodoro-today-closed");
         pomodoroTodayClosed.classList.remove("pomodoro-today-open");
+        var barOpener = document.getElementById("bar-opener");
+        barOpener.classList.remove("bar-opener-hide");
+        var barCloser = document.getElementById("bar-closer");
+        barCloser.classList.remove("bar-closer-appear");
     }
 </script>
 </html>

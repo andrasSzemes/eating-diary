@@ -14,6 +14,62 @@ body {
 }
 
 /* ↓ Index page: left side bar ↓ */
+#bar-opener {
+    width: 5.3vw;
+    height:100%;
+    position: fixed;
+    top: 0;
+    border: 0;
+    background-color: transparent;
+    transition-duration: 1s;
+    outline:none;
+}
+
+#bar-opener div {
+    opacity: 0.3;
+    transform: rotate(-90deg) translate(-90%,0) scale(1.2,1.1);
+    font-family: clementine_sketch;
+    font-size: 1.6vw;
+    transition-duration: 0.2s;
+}
+
+@keyframes vibrate {
+    0% {margin: 0vh}
+    25% {margin-top: 1vh}
+    50% {margin: 0vh}
+    75% {margin-bottom: 1vh}
+    100% {margin: 0vh}
+}
+
+#bar-closer {
+    position: fixed;
+    background-color: transparent;
+    left: 27vw;
+    width: 73vw;
+    height: 100%;
+    transform: translate(100%,0);
+    border: 0;
+    outline:none;
+}
+
+.bar-closer-appear {
+    transform: translate(0,0) !important;
+}
+
+#bar-opener:hover div {
+    opacity: 0.6;
+    font-family: clementine_sketch;
+    transition-duration: 0.2s;
+    animation-name: vibrate;
+    animation-duration: 0.3s;
+    animation-timing-function: linear;
+    animation-iteration-count: 2;
+}
+
+.bar-opener-hide {
+    transform: translate(-100%,0);
+}
+
 #left-side-bar-closed {
     width: 5vw;
     height:100%;
@@ -178,7 +234,7 @@ body {
     transition-duration: 0.2s;
 }
 /* ↑ Index page: left side bar ↑ */
-
+/* ↓ Index page: daily pomodoro counter ↓ */
 .pomodoro-red {
     color: #DC7992;
     filter: brightness(80%);
@@ -231,7 +287,8 @@ body {
     opacity: 0;
     transform: scale(0.3);
 }
-
+/* ↑ Index page: daily pomodoro counter ↑ */
+/* ↓ Index page: "click here to add first note" ↓ */
 #zero-card-message {
     width: -webkit-fill-available;
     position: fixed;
@@ -256,6 +313,7 @@ body {
     transform: scale(1.65);
     transition-duration: 0.2s;
 }
+/* ↑ Index page: "click here to add first note" ↑ */
 
 #input-new-class-name {
     background-color: inherit;
@@ -292,8 +350,8 @@ body {
 .place-for-notes {
     position: fixed;
     top: 9.5vh;
-    left: 10vw;
-    width: 90vw;
+    left: 27.5vw;
+    width: 50vw;
     height: 100vh;
     z-index: 0;
 }
@@ -303,7 +361,7 @@ body {
     opacity: 0.4;
     height: 240px;
     width: 50vw;
-    left:45vw;
+    left: 25vw;
     transform: translate(-50%,0);
     animation-name: appear;
     animation-fill-mode: forwards;
@@ -488,11 +546,12 @@ body {
 }
 
 #add-new-note {
-    width: -webkit-fill-available;
     position: fixed;
     top: 2.5vh;
-    left: 5vw;
+    left: 52.5vw;
+    height: 1vh;
     font-family: clementine_sketch;
+    transform: translate(-50%,0);
 }
 
 #add-new-note div {
@@ -501,7 +560,6 @@ body {
     padding: 15px 0;
     user-select: none;
     transition-duration: 0.2s;
-    margin: 0 auto;
     opacity: 0.4;
 }
 
