@@ -15,7 +15,7 @@ body {
 
 /* ↓ Index page: left side bar ↓ */
 #bar-opener {
-    width: 5.3vw;
+    width: 5vw;
     height:100%;
     position: fixed;
     top: 0;
@@ -23,6 +23,11 @@ body {
     background-color: transparent;
     transition-duration: 1s;
     outline:none;
+}
+
+#bar-opener:hover {
+    background-color: #ae9b87;
+    transition-duration: 0.2s;
 }
 
 #bar-opener div {
@@ -44,8 +49,8 @@ body {
 #bar-closer {
     position: fixed;
     background-color: transparent;
-    left: 27vw;
-    width: 73vw;
+    left: 24vw;
+    width: 76vw;
     height: 100%;
     transform: translate(100%,0);
     border: 0;
@@ -85,7 +90,7 @@ body {
 }
 
 .left-side-bar-open {
-    width: 27vw !important;
+    width: 24vw !important;
     height:100%;
     position: fixed;
     top: 0;
@@ -183,7 +188,7 @@ body {
 
 .place-for-card-classes-open {
     transition-delay: 0.2s;
-    transition-duration: 0.3s;
+    transition-duration: 0.5s;
     opacity: 1 !important;
     width: 28vw !important;
     transform: translate(-5%,0) scale(0.9);
@@ -348,20 +353,27 @@ body {
 }
 
 .place-for-notes {
+    padding: 12px 6px;
     position: fixed;
     top: 9.5vh;
-    left: 27.5vw;
+    left: 25.5vw;
     width: 50vw;
-    height: 100vh;
+    height: 87.4vh;
     z-index: 0;
+    overflow: scroll;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-radius: 15px;
 }
 
 .note-format {
+    font-size: medium;
     position: absolute;
     opacity: 0.4;
     height: 240px;
     width: 50vw;
     left: 25vw;
+    margin-left: 6px;
     transform: translate(-50%,0);
     animation-name: appear;
     animation-fill-mode: forwards;
@@ -381,7 +393,7 @@ body {
     animation-name: appear;
     animation-fill-mode: forwards;
     animation-duration: 0.1s;
-    z-index: 1;
+    z-index: 3;
     transition-duration: 0.3s;
     filter: brightness(100%) !important;
     box-shadow: 0px 0px 300px 100px #a89582;
@@ -400,11 +412,12 @@ body {
 }
 
 .note-format-add {
-    margin-left: 50%;
-    margin-top: 25%;
-    transform: translate(-200px,-150px);
+    position: fixed;
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-50%,-50%);
     height: 300px;
-    width: 400px;
+    width: 50vw;
     background-color: #FFFEE3;
     border-radius: 15px;
 }
@@ -434,7 +447,7 @@ body {
 }
 
 .note-header p {
-    font-size: medium;
+    font-size: large;
 }
 
 #note-header-input {
@@ -493,7 +506,7 @@ body {
     background-color: #FFFEE3;
     padding: 10px 10px;
     height: 200px;
-    width: 380px;
+    width: 50vw;
     position: relative;
     font-size: medium;
     border-width: 0;
@@ -548,7 +561,7 @@ body {
 #add-new-note {
     position: fixed;
     top: 2.5vh;
-    left: 52.5vw;
+    left: 48.8vw;
     height: 1vh;
     font-family: clementine_sketch;
     transform: translate(-50%,0);

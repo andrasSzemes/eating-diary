@@ -23,7 +23,7 @@
         </h2>
     </a>
 </div>
-<button id="bar-opener" onclick="left_side_bar_open()"><div>Your^&nbsp;Topics^</div></button>
+<button id="bar-opener" onclick="left_side_bar_open()"><div>My^&nbsp;Topics^</div></button>
 <button id="bar-closer" onclick="left_side_bar_close()"></button>
 <div id="zero-card-message" {{ 'hidden' if all_notes|length > 0 }}>
     <div>
@@ -37,7 +37,9 @@
 </div>
 <div class="place-for-notes" {{ 'hidden' if all_notes|length == 0 }}>
     {% for note in all_notes %}
-        <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}" style="animation-delay: {{ loop.index / 500 }}s; margin-top: {{ (loop.index - 1) * 70}}px">
+        <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}"
+             style="animation-delay: {{ loop.index / 500 }}s;
+                    margin-top: {{ (loop.index - 1) * 70}}px;">
             <form>
                 <div class="note-header">
                     <a href="/delete-note/{{ note.id }}"><img src="/static/remove-icon.png" id="remove-icon" draggable="false"></a>
