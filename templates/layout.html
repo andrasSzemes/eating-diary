@@ -46,5 +46,32 @@
         var barCloser = document.getElementById("bar-closer");
         barCloser.classList.remove("bar-closer-appear");
     }
+
+    function show_note(index) {
+        console.log(index);
+        var note = document.getElementsByClassName("note-format")[index];
+        note.classList.add("show-note");
+        var showButtons = document.getElementsByClassName("show-note-button");
+        for (const showButton of showButtons) {
+            showButton.setAttribute("hidden", '');
+        }
+        var hideButton = document.getElementsByClassName("hide-note-button")[index];
+        hideButton.removeAttribute("hidden");
+        var refreshIcon = document.getElementsByClassName("refresh-icon")[index];
+        refreshIcon.removeAttribute("hidden");
+    }
+
+    function hide_note(index) {
+        var note = document.getElementsByClassName("note-format")[index];
+        note.classList.remove("show-note")
+        var showButtons = document.getElementsByClassName("show-note-button");
+        for (const showButton of showButtons) {
+            showButton.removeAttribute("hidden");
+        }
+        var hideButton = document.getElementsByClassName("hide-note-button")[index];
+        hideButton.setAttribute("hidden", '');
+        var refreshIcon = document.getElementsByClassName("refresh-icon")[index];
+        refreshIcon.setAttribute("hidden",'');
+    }
 </script>
 </html>

@@ -40,10 +40,21 @@
         <div class="note-format {{ ' move-left' if loop.index % 2 == 1 else ' move-right'}}"
              style="animation-delay: {{ loop.index / 500 }}s;
                     margin-top: {{ (loop.index - 1) * 70}}px;">
+            <button class="show-note-button" onclick="show_note({{ loop.index - 1 }})"></button>
+            <button class="hide-note-button" onclick="hide_note({{ loop.index - 1 }})" hidden></button>
             <form>
                 <div class="note-header">
-                    <a href="/delete-note/{{ note.id }}"><img src="/static/remove-icon.png" id="remove-icon" draggable="false"></a>
-                    <a href="/update-note/{{ note.id }}"><img src="/static/refresh.png" id="refresh-icon" class="circle" draggable="false"></a>
+                    <a href="/delete-note/{{ note.id }}">
+                        <img src="/static/remove-icon.png"
+                             id="remove-icon"
+                             draggable="false">
+                    </a>
+                    <a href="/update-note/{{ note.id }}">
+                        <img src="/static/refresh.png"
+                             class="refresh-icon circle"
+                             draggable="false"
+                             hidden>
+                    </a>
                     <p>{{ note.header }}</p>
                     <div class="note-counter importance{{ note.importance }}">
                         <a href="/up-vote/{{ note.id }}">
@@ -58,11 +69,11 @@
                     {% set body = note.body.split('\n') %}
                     <div contenteditable="true" name="new_body">
                         {% for line in body if line|length > 1 %}
-                            {% if line[:1] == '!' %}
-                                {% if line[1:5] == '    ' %}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ line[1:] }}<br>
+                            {% if line[:4] == '    ' %}
+                                {% if line[4:8] == '    ' %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ line[1:] }}<br>
                                 {% else %}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;{{ line[1:] }}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ line[1:] }}<br>
                                 {% endif %}
                             {% else %}
                                 <li style={{"margin-bottom:0px" if line[0] == '-' else '' }}>

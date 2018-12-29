@@ -353,7 +353,7 @@ body {
 }
 
 .place-for-notes {
-    padding: 12px 6px;
+    padding: 6px 6px;
     position: fixed;
     top: 9.5vh;
     left: 25.5vw;
@@ -388,7 +388,7 @@ body {
     opacity: 0.7;
     transition-duration: 0.2s;
 }
-
+/*
 .note-format:hover {
     animation-name: appear;
     animation-fill-mode: forwards;
@@ -404,7 +404,7 @@ body {
     opacity: 1;
     transition-duration: 0.4s;
 }
-
+*/
 @keyframes appear {
     20% {opacity: 0.2}
     50% {opacity: 0.4}
@@ -452,9 +452,9 @@ body {
 
 #note-header-input {
     background-color: #FFFDC9;
-    padding: 10px 5px;
+    padding: 10px 1vw;
     height: 38px;
-    width: 346px;
+    width: 42vw;
     border-top-left-radius: 15px;
     border-style: dashed;
     border-width: 0;
@@ -504,9 +504,9 @@ body {
 
 #note-body-input {
     background-color: #FFFEE3;
-    padding: 10px 10px;
+    padding: 1vw 1vw;
     height: 200px;
-    width: 50vw;
+    width: 48vw;
     position: relative;
     font-size: medium;
     border-width: 0;
@@ -643,17 +643,19 @@ body {
     background-color: #F67281;
 }
 
-#refresh-icon {
+.refresh-icon {
     position: absolute;
-    height: 80px;
-    margin-top: 120px;
-    margin-left: 400px;
-    opacity: 0;
+    height: 60px;
+    margin-top: 0;
+    left: 39vw;
+    opacity: 0.05;
     transition-duration: 0.25s;
     cursor: default;
+    background-color: transparent;
+    z-index: 1;
 }
 
-#refresh-icon:hover {
+.refresh-icon:hover {
     opacity: 0.8;
     transition-duration: 0.3s;
     cursor: default;
@@ -685,6 +687,27 @@ a {
 
 textarea {
     resize: none;
+}
+
+.show-note-button, .hide-note-button{
+    position: fixed;
+    width: 39vw;
+    height: 60px;
+    z-index: 2;
+    border: 0;
+    background-color: transparent;
+    outline:none;
+}
+
+.show-note {
+    z-index: 2 !important;
+    transition-duration: 0.3s;
+    filter: brightness(100%) !important;
+    box-shadow: 0px 0px 300px 100px #a89582;
+}
+
+.show-note div{
+    opacity: 1 !important;
 }
 
 /* http://paletton.com/#uid=31O0X0kalJm3vSk6PO1dQEAhaAa */
