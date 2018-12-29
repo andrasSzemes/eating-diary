@@ -3,6 +3,10 @@
   src: url(/static/clementine_sketch.ttf) format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
+html, body {
+    overflow: hidden;
+}
+
 body {
     background-image: url("/static/background.jpg");
     color: #5f5f5f;
