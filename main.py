@@ -81,6 +81,11 @@ def back_up():
     return redirect(url_for("index"))
 
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
 if __name__ == '__main__':
     app.secret_key = 'the_one_to_rule_them_all'
     app.run(host='0.0.0.0',
