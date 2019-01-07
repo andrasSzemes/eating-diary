@@ -3,23 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Notes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     <link rel="icon" href="/static/card_class.png">
-    <script>
-        function messageAppear(event) {
-            let message = document.getElementsByTagName("h1");
-            let messageLetters = message[0].getElementsByTagName("span");
-            let defTransDel = 0.05;
-            for (let i = 0; i < messageLetters.length; i++) {
-                messageLetters[i].style.transitionDelay = (defTransDel * i).toString() + 's'
-            }
-            for (let i = 0; i < messageLetters.length; i++) {
-                messageLetters[i].style.opacity = '1';
-            }
-        }
-        let message = document.getElementsByTagName("h1")[0];
-        window.addEventListener('load', messageAppear);
-    </script>
+    <script src="/static/login.js" defer></script>
 </head>
 <body>
     <div id="login-page">
@@ -27,8 +13,16 @@
             {% set message = ['W','e','l','c','o','m','e^ ','T','o^ ','N','o','t','e','s^','!'] %}
             {% for letter in message %}<span>{{ letter }}</span>{% endfor %}
         </h1>
-        <p>User^ Name^ : <input autofocus autocomplete="off"></p>
-        <p>Pass^word^ : <input type="password" autocomplete="off"></p>
+        <p>
+            {% set username = ['U','s','e','r^ ','N','a','m','e^ ',': '] %}
+            {% for letter in username %}<span>{{ letter }}</span>{% endfor %}
+            <span class="brown-dashed-underline"><input autocomplete="off"></span>
+        </p>
+        <p>
+            {% set password = ['P','a','s','s^','w','o','r','d^ ', ': '] %}
+            {% for letter in password %}<span>{{ letter }}</span>{% endfor %}
+            <span class="brown-dashed-underline"><input type="password" autocomplete="off"></span>
+        </p>
     </div>
 </body>
 </html>
