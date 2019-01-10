@@ -47,9 +47,8 @@ def update_note(note_id):
         note_to_update = request.form.to_dict()
         data_manager.update_note(note_to_update)
         return redirect(url_for("index"))
-    else:
-        selected_note = data_manager.get_note_by_id(note_id)
-        return render_template('add_note.html', selected_note=selected_note)
+    selected_note = data_manager.get_note_by_id(note_id)
+    return render_template('add_note.html', selected_note=selected_note)
 
 
 @app.route('/change-class/<note_class>')
@@ -79,6 +78,11 @@ def count_pomodoro():
 def back_up():
     data_manager.backup()
     return redirect(url_for("index"))
+
+
+@app.route('/select-topic')
+def select_topic():
+    return render_template('select_topic.html')
 
 
 if __name__ == '__main__':
