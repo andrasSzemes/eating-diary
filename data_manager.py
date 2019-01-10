@@ -10,20 +10,20 @@ import os
 def save_note(cursor, new_note):
     cursor.execute("""
                     INSERT INTO notes
-                    (header, body, class_id)
-                    VALUES (%(header)s, %(body)s, %(class_id)s);
+                    (header, body, subtopic_id)
+                    VALUES (%(header)s, %(body)s, %(subtopic_id)s);
                     """,
-                    new_note)
+                   new_note)
 
 
 @connection.connection_handler
 def get_all_notes(cursor, note_class):
     cursor.execute("""
-                    SELECT notes.id, notes.header, notes.body, notes.submission_time, notes.importance, classes.class_id
+                    SELECT notes.id, notes.header, notes.body, notes.submission_time, notes.importance, subtopics.subtopic_id
                     FROM notes
-                    JOIN classes
-                        ON notes.class_id = classes.class_id
-                    WHERE classes.class_name = %(note_class)s
+                    JOIN subtopics
+                        ON notes.subtopic_id = subtopics.subtopic_id
+                    WHERE subtopics.subtopic_name = %(note_class)s
                     ORDER BY submission_time DESC;
                     """,
                    {'note_class': note_class})
@@ -73,13 +73,13 @@ def get_note_by_id(cursor, note_id):
 @connection.connection_handler
 def get_all_classes(cursor):
     cursor.execute("""
-                    SELECT class_name
-                    FROM classes
-                    ORDER BY class_id DESC
+                    SELECT subtopic_name
+                    FROM subtopics
+                    ORDER BY subtopic_id DESC
                     """)
     classes = []
     for fetched_dict in cursor.fetchall():
-        classes.append(fetched_dict['class_name'])
+        classes.append(fetched_dict['subtopic_name'])
 
     return classes
 
@@ -87,22 +87,22 @@ def get_all_classes(cursor):
 @connection.connection_handler
 def save_new_class(cursor, new_class):
     cursor.execute("""
-                    INSERT INTO classes
-                    (class_name)
+                    INSERT INTO subtopics
+                    (subtopic_name)
                     VALUES (%(new_class)s)
                     """,
                    {'new_class': new_class})
 
 
 @connection.connection_handler
-def get_class_id_by_name(cursor, class_name):
+def get_subtopic_id_by_name(cursor, subtopic_name):
     cursor.execute("""
-                    SELECT class_id
-                    FROM classes
-                    WHERE class_name = %(class_name)s
+                    SELECT subtopic_id
+                    FROM subtopics
+                    WHERE subtopic_name = %(subtopic_name)s
                     """,
-                   {'class_name': class_name})
-    return cursor.fetchone()['class_id']
+                   {'subtopic_name': subtopic_name})
+    return cursor.fetchone()['subtopic_id']
 
 
 @connection.connection_handler
@@ -135,13 +135,13 @@ def backup(cursor):
 
 
 @connection.connection_handler
-def archive_pomodoro(cursor, topic):
+def archive_pomodoro(cursor, subtopic):
     cursor.execute("""
                     INSERT INTO pomodoro
-                    (topic)
-                    VALUES (%(topic)s)
+                    (subtopic)
+                    VALUES (%(subtopic)s)
                     """,
-                   {'topic': topic})
+                   {'subtopic': subtopic})
 
 
 @connection.connection_handler
@@ -155,3 +155,32 @@ def pomodoro_count_today(cursor):
                     """)
 
     return cursor.fetchone()['pomodoros_today']
+
+
+@connection.connection_handler
+def get_subtopics_for_topic(cursor, topic):
+    cursor.execute("""
+                    SELECT subtopic_name
+                    FROM subtopics
+                    WHERE topic_name = %(topic)s
+                    """,
+                   {'topic': topic})
+
+    subtopics = []
+    for subtopic_dict in cursor.fetchall():
+        subtopics.append(subtopic_dict['subtopic_name'])
+
+    return subtopics
+
+
+@connection.connection_handler
+def get_all_notes_for_topic(cursor, topic):
+    cursor.execute("""
+                    SELECT notes.*, subtopics.subtopic_name
+                    FROM notes
+                    LEFT JOIN subtopics ON notes.subtopic_id = subtopics.subtopic_id
+                    WHERE subtopics.topic_name = %(topic)s
+                    """,
+                   {'topic': topic})
+
+    return cursor.fetchall()

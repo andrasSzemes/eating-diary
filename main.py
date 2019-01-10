@@ -16,7 +16,7 @@ def index():
 def add_note():
     if request.method == 'POST':
         new_note = request.form.to_dict()
-        new_note['class_id'] = data_manager.get_class_id_by_name(session['note_class'])
+        new_note['subtopic_id'] = data_manager.get_subtopic_id_by_name(session['note_class'])
         data_manager.save_note(new_note)
         return redirect(url_for("index"))
     else:
@@ -69,8 +69,8 @@ def add_new_class():
 
 @app.route('/count-pomodoro')
 def count_pomodoro():
-    topic = session['note_class']
-    data_manager.archive_pomodoro(topic)
+    subtopic = session['note_class']
+    data_manager.archive_pomodoro(subtopic)
     return redirect(url_for("index"))
 
 
@@ -83,6 +83,12 @@ def back_up():
 @app.route('/select-topic')
 def select_topic():
     return render_template('select_topic.html')
+
+@app.route('/<topic>')
+def show_notes_of_topic(topic):
+    subtopics_for_topic = data_manager.get_subtopics_for_topic(topic)
+    all_notes_for_topic = data_manager.get_all_notes_for_topic(topic)
+    return render_template('topic.html', subtopics_for_topic=subtopics_for_topic, topic=topic, all_notes_for_topic=all_notes_for_topic)
 
 
 if __name__ == '__main__':

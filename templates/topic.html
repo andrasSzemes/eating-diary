@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Topic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/select_topic.css') }}">
+</head>
+<body>
+    {{ topic }}
+    {{ subtopics_for_topic }}
+    {{ all_notes_for_topic }}
+</body>
+</html>
