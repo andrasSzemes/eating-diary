@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <title>Topic</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/select_topic.css') }}">
+    <script src="/static/topic.js" defer></script>
 </head>
 <body>
-    {{ topic }}
-    {{ subtopics_for_topic }}
-    {{ all_notes_for_topic }}
+    <div id="left-side">
+        <div>
+            <div id="JS-logo" class="box">
+                <p class="centralise">JS</p>
+            </div>
+        </div>
+        <div id="left-side-subtopics">
+            <img id="up-arrow1" src="/static/sort-up-solid.svg">
+            {% for subtopic in subtopics_for_topic %}
+                <div class="subtopic">{{ subtopic }}</div>
+            {% endfor %}
+            <img id="down-arrow1" src="/static/sort-down-solid.svg">
+        </div>
+    </div>
+    <div id="right-side">{{ all_notes_for_topic }}</div>
 </body>
 </html>
