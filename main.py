@@ -85,6 +85,7 @@ def back_up():
 def select_topic():
     return render_template('select_topic.html')
 
+
 @app.route('/<topic>')
 def show_notes_of_topic(topic):
     subtopics_for_topic = data_manager.get_subtopics_for_topic(topic)
@@ -99,9 +100,17 @@ def get_notes():
     return json.dumps(try_that)
 
 
+@app.route('/subtopic/<subtopic>')
+def get_subtopic_notes(subtopic):
+    notes_for_subtopic = data_manager.get_notes_for_subtopic(subtopic)
+    return json.dumps(notes_for_subtopic)
+
+
 @app.route('/update-positions', methods=['POST'])
 def update_positions():
-    print(request.form.to_dict())
+    new_positions = request.form.to_dict()
+    print(new_positions)
+    data_manager.update_note_position(new_positions)
     return ''
 
 

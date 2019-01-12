@@ -24,19 +24,30 @@ let sendNewPositions = function() {
 
 dragula(Array.from(document.getElementsByClassName('grid-item'))).on('drop', sendNewPositions);
 
-$.ajax({
-    dataType: "json",
-    url: '/get-notes/1',
-    success: function(response) {
-        let notes = response;
-        let gridItems = document.getElementsByClassName('grid-item');
 
-        for (let i=0; i < Object.keys(notes).length; i++) {
-            neededGridItem = gridItems[notes['note' + i]['grid-item']];
+let loadNotes = function() {
+    loadNotes.subtopic = event.target.dataset.subtopicLink;
 
-            neededGridItem.innerHTML = '<div class="note"><p>' + notes['note' + i]['header'] + '</p></div>';
-            neededGridItem.dataset.header = notes['note' + i]['header'];
-            neededGridItem.dataset.gridItem = notes['note' + i]['grid-item'];
+    $.ajax({
+        dataType: "json",
+        url: '/subtopic/' + loadNotes.subtopic,
+        success: function (response) {
+            let notes = response;
+            let gridItems = document.getElementsByClassName('grid-item');
+
+            for (let i = 0; i < Object.keys(notes).length; i++) {
+                neededGridItem = gridItems[notes['note' + i]['position']];
+
+                neededGridItem.innerHTML = '<div class="note"><p>' + notes['note' + i]['header'] + '</p></div>';
+                neededGridItem.dataset.header = notes['note' + i]['header'];
+                neededGridItem.dataset.gridItem = notes['note' + i]['grid-item'];
+            }
         }
-    }
-});
+    });
+};
+
+
+let subtopicButtons = document.getElementsByClassName('subtopic');
+for (subtopicButton of subtopicButtons) {
+    subtopicButton.addEventListener('click', loadNotes)
+}

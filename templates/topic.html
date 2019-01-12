@@ -19,7 +19,7 @@
         <img id="up-arrow1" src="/static/sort-up-solid.svg">
         <div id="left-side-subtopics">
             {% for subtopic in subtopics_for_topic %}
-                <div class="subtopic">{{ subtopic }}</div>
+                <div class="subtopic" data-subtopic-link={{ subtopic.subtopic_name_as_link }}>{{ subtopic.subtopic_name }}</div>
             {% endfor %}
         </div>
         <img id="down-arrow1" src="/static/sort-down-solid.svg">

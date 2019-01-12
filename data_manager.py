@@ -160,17 +160,13 @@ def pomodoro_count_today(cursor):
 @connection.connection_handler
 def get_subtopics_for_topic(cursor, topic):
     cursor.execute("""
-                    SELECT subtopic_name
+                    SELECT subtopic_name, subtopic_name_as_link
                     FROM subtopics
                     WHERE topic_name = %(topic)s
                     """,
                    {'topic': topic})
 
-    subtopics = []
-    for subtopic_dict in cursor.fetchall():
-        subtopics.append(subtopic_dict['subtopic_name'])
-
-    return subtopics
+    return cursor.fetchall()
 
 
 @connection.connection_handler
@@ -184,3 +180,31 @@ def get_all_notes_for_topic(cursor, topic):
                    {'topic': topic})
 
     return cursor.fetchall()
+
+
+@connection.connection_handler
+def get_notes_for_subtopic(cursor, subtopic):
+    cursor.execute("""
+                    SELECT notes.header, notes.body, notes.importance, notes.position, subtopics.subtopic_name_as_link
+                    FROM notes
+                    JOIN subtopics ON notes.subtopic_id=subtopics.subtopic_id
+                    WHERE subtopics.subtopic_name_as_link = %(subtopic)s
+                    """,
+                   {'subtopic': subtopic})
+
+    notes = {}
+    for i, note_dict in enumerate(cursor.fetchall()):
+        notes['note'+str(i)] = note_dict
+
+    return notes
+
+
+@connection.connection_handler
+def update_note_position(cursor, new_positions):
+    for header, position in new_positions.items():
+        cursor.execute("""
+                        UPDATE notes
+                        SET position = %(position)s
+                        WHERE header = %(header)s
+                        """,
+                       {'header': header, 'position': position})
