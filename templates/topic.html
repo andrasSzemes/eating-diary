@@ -12,9 +12,29 @@
 <body>
     <div id="left-side">
         <div>
-            <div id="JS-logo" class="box">
-                <p class="centralise">JS</p>
-            </div>
+            <a href="select-topic">
+                {% if topic == 'java-script'%}
+                    <div id="JS-logo" class="box">
+                        <p class="centralise">JS</p>
+                    </div>
+                {% elif topic == 'git' %}
+                    <div id="git-logo" class="box">
+                        <img src="/static/git-icon.png" class="centralise" draggable="false">
+                    </div>
+                {% elif topic == 'ux-and-ui' %}
+                    <div id="UIUX-logo" class="box">
+                        <img src="/static/UIUX-logo.png" class="centralise" draggable="false">
+                    </div>
+                {% elif topic == 'security' %}
+                    <div id="security-logo" class="box">
+                        <img src="/static/user-secret-solid.svg" class="centralise" draggable="false">
+                    </div>
+                {% elif topic == 'notes' %}
+                    <div id="note-logo" class="box">
+                        <img src="/static/sticky-note-regular.svg" class="centralise" draggable="false">
+                    </div>
+                {% endif %}
+            </a>
         </div>
         <img id="up-arrow1" src="/static/sort-up-solid.svg">
         <div id="left-side-subtopics">
