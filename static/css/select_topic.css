@@ -121,6 +121,7 @@ h1 {
     position: fixed;
     width: 25vw;
     height: 100%;
+    overflow: scroll;
 }
 
 #right-side {
@@ -128,22 +129,24 @@ h1 {
     position: fixed;
     width: 75vw;
     height: 100%;
+    overflow: scroll;
 }
 
 #up-arrow1 {
-    position: absolute;
+    position: fixed;
     width: 6vw;
     opacity: 0.4;
     left: 12.5vw;
-    transform: translate(-50%,-48%);
+    transform: translate(-50%,-24%);
 }
 
 #down-arrow1 {
-    position: absolute;
+    position: fixed;
     width: 6vw;
     opacity: 0.4;
     left: 12.5vw;
-    transform: translate(-50%,0);
+    transform: translate(-50%,-54%);
+    top: 92%;
 }
 
 .subtopic {
@@ -151,13 +154,14 @@ h1 {
     box-shadow: 0px 0px 20px 5px #a89582, inset 0 0 32px 0px #5f5f5f;
     font-size: x-large;
     padding: 5px;
-    margin: 5px;
+    margin: 10px 5px;
     border-radius: 12px;
     font-family: "Open Sans",sans-serif;
     color: floralwhite;
     opacity: 0.7;
     transition-duration: 0.5s;
     text-align: center;
+    transform: skewX(-12deg) scaleY(0.9);
 }
 
 .subtopic:hover {
@@ -167,6 +171,42 @@ h1 {
 
 #left-side-subtopics {
     margin-top: 9%;
-    height: 54%;
-    padding: 2px;
+    height: 53%;
+    padding: 2px 8px;
+}
+
+.grid-item {
+    margin: 2vw;
+    border-style: dashed;
+    border-width: 2px;
+    border-radius: 6px;
+    text-align: center;
+    height: 15vw;
+    width: 20vw;
+    /* background-image: url("/static/paper2.jpg"); */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.note {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    border-radius: 5px;
+    box-shadow: 0px 0px 40px 6px #91806f, inset 0 0 27px 0px #a89582;
+    background-image: url(/static/paper2.jpg);
+}
+
+.note p {
+    margin-top: 7.5vw;
+    text-align: center;
+    transform: translate(0,-50%)scaleY(0.9);
+    font-family: "Open Sans",sans-serif;
+    font-size: x-large;
+    width: 19vw;
+    padding-left: 0.5vw;
 }

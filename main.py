@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import data_manager
+import json
 
 app = Flask(__name__)
 
@@ -87,8 +88,21 @@ def select_topic():
 @app.route('/<topic>')
 def show_notes_of_topic(topic):
     subtopics_for_topic = data_manager.get_subtopics_for_topic(topic)
-    all_notes_for_topic = data_manager.get_all_notes_for_topic(topic)
-    return render_template('topic.html', subtopics_for_topic=subtopics_for_topic, topic=topic, all_notes_for_topic=all_notes_for_topic)
+    session['all_notes_for_topic'] = data_manager.get_all_notes_for_topic(topic)
+    return render_template('topic.html', subtopics_for_topic=subtopics_for_topic, topic=topic)
+
+
+@app.route('/get-notes/1')
+def get_notes():
+    try_that = {'note0': {'header': 'HelloHello Hello HelloHello', 'body': 'text', 'grid-item': 3},
+                'note1': {'header': 'Mizu', 'body': 'text2', 'grid-item': 6}}
+    return json.dumps(try_that)
+
+
+@app.route('/update-positions', methods=['POST'])
+def update_positions():
+    print(request.form.to_dict())
+    return ''
 
 
 if __name__ == '__main__':
