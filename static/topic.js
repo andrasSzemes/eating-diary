@@ -38,10 +38,28 @@ let loadNotes = function() {
             for (let i = 0; i < Object.keys(notes).length; i++) {
                 neededGridItem = gridItems[notes['note' + i]['position']];
                 neededGridItem.innerHTML = '<div class="note"><p>' + notes['note' + i]['header'] + '</p></div>';
-                neededGridItem.firstChild.dataset.body = notes['note' + i]['body']
+                neededGridItem.firstChild.dataset.header = notes['note' + i]['header'];
+                neededGridItem.firstChild.dataset.body = notes['note' + i]['body'];
+                neededGridItem.firstChild.addEventListener('click', openNote)
             }
         }
     });
+};
+
+
+let openNote = function() {
+    let clickedNote = event.target.parentElement;
+    let clickedNoteText = event.target;
+
+    let openedHeader = document.getElementById('opened-header').getElementsByTagName('p')[0];
+    openedHeader.textContent = clickedNote.dataset.header ? clickedNote.dataset.header : clickedNoteText.dataset.header;
+
+    let openedBody = document.getElementById('opened-body').getElementsByTagName('textarea')[0];
+    openedBody.innerHTML = clickedNote.dataset.body ? clickedNote.dataset.body : clickedNoteText.dataset.body;
+    console.log(clickedNote.dataset.body ? clickedNote.dataset.body : clickedNoteText.dataset.body);
+
+    let openedNote = document.getElementById('opened-note');
+    openedNote.removeAttribute('hidden')
 };
 
 
