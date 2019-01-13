@@ -208,3 +208,14 @@ def update_note_position(cursor, new_positions):
                         WHERE header = %(header)s
                         """,
                        {'header': header, 'position': position})
+
+
+@connection.connection_handler
+def update_note_body(cursor, new_data):
+    for reference_header, new_body in new_data.items():
+        cursor.execute("""
+                        UPDATE notes
+                        SET body = %(new_body)s
+                        WHERE header = %(reference_header)s
+                        """,
+                       {'new_body': new_body, 'reference_header': reference_header})

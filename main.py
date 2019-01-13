@@ -107,6 +107,14 @@ def update_positions():
     return ''
 
 
+@app.route('/update-body', methods=['POST'])
+def update_body():
+    new_data = request.form.to_dict()
+    print(new_data)
+    data_manager.update_note_body(new_data)
+    return ''
+
+
 if __name__ == '__main__':
     app.secret_key = 'the_one_to_rule_them_all'
     app.run(host='0.0.0.0',

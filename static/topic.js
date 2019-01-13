@@ -26,7 +26,7 @@ dragula(Array.from(document.getElementsByClassName('grid-item'))).on('drop', sen
 
 
 let loadNotes = function() {
-    loadNotes.subtopic = event.target.dataset.subtopicLink;
+    loadNotes.subtopic = event.target.dataset.subtopicLink ? event.target.dataset.subtopicLink : loadNotes.subtopic;
 
     $.ajax({
         dataType: "json",
@@ -96,7 +96,26 @@ let editNote = function() {
 };
 
 let saveNote = function() {
-    removeEditingNote()
+    removeEditingNote();
+
+    let openedBody = document.getElementById('opened-body').getElementsByTagName('textarea')[0];
+    let newBody = openedBody.value;
+    let openedHeader = document.getElementById('opened-header').getElementsByTagName('p')[0];
+    let referenceHeader = openedHeader.textContent;
+
+    let updatedNote = {};
+    updatedNote[referenceHeader] = newBody;
+    console.log(updatedNote);
+
+    $.ajax({
+          type: "POST",
+          url: "/update-body",
+          data: updatedNote,
+          success: null,
+          dataType: 'json'
+    });
+
+    loadNotes()
 };
 
 let inicialisesubtopicButtons = function() {
