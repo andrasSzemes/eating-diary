@@ -37,10 +37,8 @@ let loadNotes = function() {
 
             for (let i = 0; i < Object.keys(notes).length; i++) {
                 neededGridItem = gridItems[notes['note' + i]['position']];
-
                 neededGridItem.innerHTML = '<div class="note"><p>' + notes['note' + i]['header'] + '</p></div>';
-                neededGridItem.dataset.header = notes['note' + i]['header'];
-                neededGridItem.dataset.gridItem = notes['note' + i]['grid-item'];
+                neededGridItem.firstChild.dataset.body = notes['note' + i]['body']
             }
         }
     });
