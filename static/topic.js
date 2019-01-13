@@ -48,6 +48,7 @@ let loadNotes = function() {
 
 
 let openNote = function() {
+    removeEditingNote();
     let clickedNote = event.target.parentElement;
     let clickedNoteText = event.target;
 
@@ -55,7 +56,7 @@ let openNote = function() {
     openedHeader.textContent = clickedNote.dataset.header ? clickedNote.dataset.header : clickedNoteText.dataset.header;
 
     let openedBody = document.getElementById('opened-body').getElementsByTagName('textarea')[0];
-    openedBody.innerHTML = clickedNote.dataset.body ? clickedNote.dataset.body : clickedNoteText.dataset.body;
+    openedBody.value = clickedNote.dataset.body ? clickedNote.dataset.body : clickedNoteText.dataset.body;
     console.log(clickedNote.dataset.body ? clickedNote.dataset.body : clickedNoteText.dataset.body);
 
     let openedNote = document.getElementById('opened-note');
@@ -63,7 +64,59 @@ let openNote = function() {
 };
 
 
-let subtopicButtons = document.getElementsByClassName('subtopic');
-for (subtopicButton of subtopicButtons) {
-    subtopicButton.addEventListener('click', loadNotes)
-}
+let closeOpenedNote = function() {
+    let openedNote = document.getElementById('opened-note');
+    openedNote.setAttribute('hidden', '');
+    removeEditingNote()
+};
+
+let removeEditingNote = function() {
+    let openedBody = document.getElementById('opened-body').getElementsByTagName('textarea')[0];
+    openedBody.style.boxShadow = '';
+    openedBody.setAttribute('readonly', '');
+    openedBody.blur();
+
+    let saveButton = document.getElementById('opened-note').getElementsByTagName('img')[2];
+    saveButton.setAttribute('hidden', '');
+
+    let editButton = document.getElementById('opened-note').getElementsByTagName('img')[1];
+    editButton.removeAttribute('hidden')
+};
+
+let editNote = function() {
+    let openedBody = document.getElementById('opened-body').getElementsByTagName('textarea')[0];
+    openedBody.removeAttribute('readonly');
+    openedBody.style.boxShadow = '0px 0px 74px -7px #a89582';
+
+    let editButton = document.getElementById('opened-note').getElementsByTagName('img')[1];
+    editButton.setAttribute('hidden', '');
+
+    let saveButton = document.getElementById('opened-note').getElementsByTagName('img')[2];
+    saveButton.removeAttribute('hidden')
+};
+
+let saveNote = function() {
+    removeEditingNote()
+};
+
+let inicialisesubtopicButtons = function() {
+    let subtopicButtons = document.getElementsByClassName('subtopic');
+    for (subtopicButton of subtopicButtons) {
+        subtopicButton.addEventListener('click', loadNotes)
+    }
+};
+
+let inicialiseOpenedNote = function() {
+    let closeButton = document.getElementById('opened-note').getElementsByTagName('img')[0];
+    closeButton.addEventListener('click', closeOpenedNote);
+
+    let editButton = document.getElementById('opened-note').getElementsByTagName('img')[1];
+    editButton.addEventListener('click', editNote);
+
+    let saveButton = document.getElementById('opened-note').getElementsByTagName('img')[2];
+    saveButton.addEventListener('click', saveNote)
+};
+
+
+inicialisesubtopicButtons();
+inicialiseOpenedNote()

@@ -273,6 +273,11 @@ h1 {
     transform: translate(-106%,0);
 }
 
+#opened-header img:nth-child(3) {
+    top: 9.5vh;
+    transform: translate(-126%,0);
+}
+
 #opened-body {
     padding: 10px 20px;
 }
@@ -286,4 +291,6 @@ h1 {
     background: transparent;
     border: 0;
     outline: none;
+    cursor: default;
+    border-radius: 8px;
 }
