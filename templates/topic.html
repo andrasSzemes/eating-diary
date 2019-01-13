@@ -47,8 +47,8 @@
     <div id="right-side">
         {{ all_notes_for_topic }}
         <div class="grid-container">
-            {% for i in range(session['all_notes_for_topic']|length + 5) %}
-                <div class="grid-item">
+            {% for i in range(50) %}
+                <div class="grid-item" hidden>
                 </div>
             {% endfor %}
         </div>

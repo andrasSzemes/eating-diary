@@ -5,6 +5,7 @@ from psycopg2.extras import RealDictCursor
 import connection
 from time import strftime
 import os
+import time
 
 @connection.connection_handler
 def save_note(cursor, new_note):
@@ -219,3 +220,34 @@ def update_note_body(cursor, new_data):
                         WHERE header = %(reference_header)s
                         """,
                        {'new_body': new_body, 'reference_header': reference_header})
+
+
+@connection.connection_handler
+def add_new_note_header(cursor, new_data):
+    cursor.execute("""
+                    INSERT INTO notes
+                    (header, subtopic_id, position)
+                    VALUES (%(new_header)s, %(subtopic_id)s, %(position)s);
+                    """,
+                   new_data)
+    print(time.time())
+
+
+@connection.connection_handler
+def get_subtopic_id_by_link_name(cursor, subtopicNameAsLink):
+    cursor.execute("""
+                    SELECT subtopic_id
+                    FROM subtopics
+                    WHERE subtopic_name_as_link = %(subtopic_name_as_link)s
+                    """,
+                   {'subtopic_name_as_link': subtopicNameAsLink})
+    return cursor.fetchone()['subtopic_id']
+
+
+@connection.connection_handler
+def get_how_many_notes_are(cursor):
+    cursor.execute("""
+                    SELECT count(id) AS number_of_notes
+                    FROM notes
+                    """)
+    return cursor.fetchone()

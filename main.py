@@ -115,6 +115,22 @@ def update_body():
     return ''
 
 
+@app.route('/add-new-note-header', methods=['POST'])
+def add_new_note_header():
+    new_data = request.form.to_dict()
+    subtopic_id = data_manager.get_subtopic_id_by_link_name(new_data['subtopic_name_as_link'])
+    new_data['subtopic_id'] = subtopic_id
+
+    data_manager.add_new_note_header(new_data)
+    return ''
+
+@app.route('/show-actual-number-of-notes')
+def show_actual_number_of_notes():
+    number_of_notes_dict = data_manager.get_how_many_notes_are()
+    print(number_of_notes_dict)
+    return json.dumps(number_of_notes_dict)
+
+
 if __name__ == '__main__':
     app.secret_key = 'the_one_to_rule_them_all'
     app.run(host='0.0.0.0',

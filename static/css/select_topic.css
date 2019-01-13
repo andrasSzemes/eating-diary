@@ -184,6 +184,7 @@ h1 {
     text-align: center;
     height: 14vw;
     width: 23vw;
+    transition-duration: 0.2s;
     /* background-image: url("/static/paper2.jpg"); */
 }
 
@@ -293,4 +294,24 @@ h1 {
     outline: none;
     cursor: default;
     border-radius: 8px;
+}
+
+.new-note {
+    cursor: text;
+    background-image: url(/static/paper2.jpg);
+    transition-duration: 0.2s;
+}
+
+.new-note-textarea {
+    background: transparent;
+    outline: none;
+    border: none;
+    text-align: center;
+    transform: scaleY(0.9);
+    font-family: "Open Sans",sans-serif;
+    font-size: x-large;
+    width: 22vw;
+    height: inherit;
+    padding-left: 0.5vw;
+    resize: none;
 }
