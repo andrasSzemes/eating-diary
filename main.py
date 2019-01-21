@@ -102,7 +102,6 @@ def get_subtopic_notes(subtopic):
 @app.route('/update-positions', methods=['POST'])
 def update_positions():
     new_positions = request.form.to_dict()
-    print(new_positions)
     data_manager.update_note_position(new_positions)
     return ''
 

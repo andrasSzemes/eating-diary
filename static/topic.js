@@ -1,23 +1,29 @@
-let logo = document.getElementsByClassName("box")[0];
-logo.style.opacity = 1;
+import {editNote, openNote, closeOpenedNote, saveNote} from '/static/modules/noteFunctions.js';
 
 let sendNewPositions = function() {
+    let positionForEachHeader = getPositionForEachHeader();
+
+    $.ajax({
+          type: "POST",
+          url: "/update-positions",
+          data: positionForEachHeader,
+          success: null,
+          dataType: 'json'
+    });
+};
+
+let getPositionForEachHeader = function() {
     let gridItems = document.getElementsByClassName('grid-item');
 
     let updateData = {};
     for (let i=0; i < gridItems.length; i++) {
         if (gridItems[i].firstElementChild) {
-            updateData[gridItems[i].firstElementChild.firstElementChild.textContent] = i
+            let noteHeader = gridItems[i].firstElementChild.firstElementChild.textContent;
+            updateData[noteHeader] = i
         }
     }
 
-    $.ajax({
-          type: "POST",
-          url: "/update-positions",
-          data: updateData,
-          success: null,
-          dataType: 'json'
-    });
+    return updateData
 };
 
 dragula(Array.from(document.getElementsByClassName('grid-item'))).on('drop', sendNewPositions);
@@ -82,7 +88,7 @@ let showEmptyHeader = function() {
 let addNewNoteHeader = function(event) {
     if (event.key == 'Enter') {
         let newHeader = event.target.value;
-        sendingData = {};
+        let sendingData = {};
         sendingData['new_header'] = newHeader;
         sendingData['subtopic_name_as_link'] = loadNotes.subtopic;
         sendingData['position'] = loadNotes.newHeaderPosition;
@@ -138,74 +144,6 @@ let hideUnnecessaryGridItems = function(startIndex, endIndex) {
     }
 };
 
-let openNote = function() {
-    removeEditingNote();
-    let clickedNote = event.target.parentElement;
-    let clickedNoteText = event.target;
-
-    let openedHeader = document.getElementById('opened-header').getElementsByTagName('p')[0];
-    openedHeader.textContent = clickedNote.dataset.header ? clickedNote.dataset.header : clickedNoteText.dataset.header;
-
-    let openedBody = document.getElementById('opened-body').getElementsByTagName('textarea')[0];
-    openedBody.value = clickedNote.dataset.body ? clickedNote.dataset.body : clickedNoteText.dataset.body;
-
-    let openedNote = document.getElementById('opened-note');
-    openedNote.removeAttribute('hidden')
-};
-
-let closeOpenedNote = function() {
-    let openedNote = document.getElementById('opened-note');
-    openedNote.setAttribute('hidden', '');
-    removeEditingNote()
-};
-
-let removeEditingNote = function() {
-    let openedBody = document.getElementById('opened-body').getElementsByTagName('textarea')[0];
-    openedBody.style.boxShadow = '';
-    openedBody.setAttribute('readonly', '');
-    openedBody.blur();
-
-    let saveButton = document.getElementById('opened-note').getElementsByTagName('img')[2];
-    saveButton.setAttribute('hidden', '');
-
-    let editButton = document.getElementById('opened-note').getElementsByTagName('img')[1];
-    editButton.removeAttribute('hidden')
-};
-
-let editNote = function() {
-    let openedBody = document.getElementById('opened-body').getElementsByTagName('textarea')[0];
-    openedBody.removeAttribute('readonly');
-    openedBody.style.boxShadow = '0px 0px 74px -7px #a89582';
-
-    let editButton = document.getElementById('opened-note').getElementsByTagName('img')[1];
-    editButton.setAttribute('hidden', '');
-
-    let saveButton = document.getElementById('opened-note').getElementsByTagName('img')[2];
-    saveButton.removeAttribute('hidden')
-};
-
-let saveNote = function() {
-    removeEditingNote();
-
-    let openedBody = document.getElementById('opened-body').getElementsByTagName('textarea')[0];
-    let newBody = openedBody.value;
-    let openedHeader = document.getElementById('opened-header').getElementsByTagName('p')[0];
-    let referenceHeader = openedHeader.textContent;
-
-    let updatedNote = {};
-    updatedNote[referenceHeader] = newBody;
-
-    $.ajax({
-          type: "POST",
-          url: "/update-body",
-          data: updatedNote,
-          success: null,
-          dataType: 'json'
-    });
-
-    loadNotes()
-};
-
 let inicialisesubtopicButtons = function() {
     let subtopicButtons = document.getElementsByClassName('subtopic');
     let subtopicButton = '';
@@ -222,11 +160,14 @@ let inicialiseOpenedNote = function() {
     editButton.addEventListener('click', editNote);
 
     let saveButton = document.getElementById('opened-note').getElementsByTagName('img')[2];
+    saveNote.endFunction = loadNotes;
     saveButton.addEventListener('click', saveNote)
 };
 
 
 window.addEventListener('load', function () {
+    let logo = document.getElementsByClassName("box")[0];
+    logo.style.opacity = 1;
     inicialisesubtopicButtons();
     inicialiseOpenedNote();
 });
