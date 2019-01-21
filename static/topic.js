@@ -22,7 +22,17 @@ let sendNewPositions = function() {
 
 dragula(Array.from(document.getElementsByClassName('grid-item'))).on('drop', sendNewPositions);
 
+let emptyAllPlaces = function() {
+    let gridItems = document.getElementsByClassName('grid-item');
+
+    let gridItem = '';
+    for (gridItem of gridItems) {
+        gridItem.innerHTML = '';
+    }
+};
+
 let loadNotes = function() {
+    emptyAllPlaces();
     loadNotes.subtopic = event.target.dataset.subtopicLink ? event.target.dataset.subtopicLink : loadNotes.subtopic;
 
     console.log(Date.now());
@@ -34,7 +44,7 @@ let loadNotes = function() {
             let gridItems = document.getElementsByClassName('grid-item');
 
             for (let i = 0; i < Object.keys(notes).length; i++) {
-                neededGridItem = gridItems[notes['note' + i]['position']];
+                let neededGridItem = gridItems[notes['note' + i]['position']];
                 neededGridItem.innerHTML = '<div class="note"><p>' + notes['note' + i]['header'] + '</p></div>';
                 neededGridItem.firstChild.dataset.header = notes['note' + i]['header'];
                 neededGridItem.firstChild.dataset.body = notes['note' + i]['body'];
@@ -198,6 +208,7 @@ let saveNote = function() {
 
 let inicialisesubtopicButtons = function() {
     let subtopicButtons = document.getElementsByClassName('subtopic');
+    let subtopicButton = '';
     for (subtopicButton of subtopicButtons) {
         subtopicButton.addEventListener('click', loadNotes)
     }
@@ -215,5 +226,7 @@ let inicialiseOpenedNote = function() {
 };
 
 
-inicialisesubtopicButtons();
-inicialiseOpenedNote()
+window.addEventListener('load', function () {
+    inicialisesubtopicButtons();
+    inicialiseOpenedNote();
+});

@@ -129,7 +129,8 @@ h1 {
     position: fixed;
     width: 56vw;
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #up-arrow1 {
@@ -314,4 +315,22 @@ h1 {
     height: inherit;
     padding-left: 0.5vw;
     resize: none;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: inherit;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .4);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: transparent;
 }
