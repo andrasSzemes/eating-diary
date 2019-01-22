@@ -29,6 +29,13 @@ let loadNotesForSubtopic = function(notes) {
     }
 };
 
+let showNewNotePlace = function() {
+    let newNoteContainer = document.getElementsByClassName('new-note-container')[0];
+    let newNotePlace = newNoteContainer.getElementsByClassName('grid-item')[0];
+
+    newNotePlace.removeAttribute('hidden')
+};
+
 export let getNotesForSubtopic = function(endFunction) {
     getNotesForSubtopic.endFunction = loadNotesForSubtopic;
 
@@ -39,9 +46,9 @@ export let getNotesForSubtopic = function(endFunction) {
         url: '/subtopic/' + getNotesForSubtopic.subtopic,
         success: function (response) {
             getNotesForSubtopic.endFunction(response);
+            showNewNotePlace()
         }
     });
-
 };
 
 export let makeSubtopicButtonsWork = function() {
@@ -51,3 +58,4 @@ export let makeSubtopicButtonsWork = function() {
         subtopicButton.addEventListener('click', getNotesForSubtopic)
     }
 };
+

@@ -188,7 +188,7 @@ h1 {
     transition-duration: 0.2s;
 }
 
-.grid-container {
+.grid-container, .new-note-container {
     display: grid;
     grid-template-columns: auto;
     padding: 10px;
