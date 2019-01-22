@@ -190,14 +190,11 @@ def get_notes_for_subtopic(cursor, subtopic):
                     FROM notes
                     JOIN subtopics ON notes.subtopic_id=subtopics.subtopic_id
                     WHERE subtopics.subtopic_name_as_link = %(subtopic)s
+                    ORDER BY notes.position ASC
                     """,
                    {'subtopic': subtopic})
 
-    notes = {}
-    for i, note_dict in enumerate(cursor.fetchall()):
-        notes['note'+str(i)] = note_dict
-
-    return notes
+    return cursor.fetchall()
 
 
 @connection.connection_handler

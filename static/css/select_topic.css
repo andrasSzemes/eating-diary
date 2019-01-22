@@ -125,9 +125,9 @@ h1 {
 }
 
 #right-side {
-    left: 44vw;
+    left: 45vw;
     position: fixed;
-    width: 56vw;
+    width: 55vw;
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -178,21 +178,22 @@ h1 {
 }
 
 .grid-item {
-    margin: 2vw;
+    margin: 1vw;
     border-style: dashed;
     border-width: 2px;
     border-radius: 6px;
     text-align: center;
-    height: 14vw;
-    width: 23vw;
+    height: 86px;
+    width: 445px;
     transition-duration: 0.2s;
-    /* background-image: url("/static/paper2.jpg"); */
 }
 
 .grid-container {
-  display: grid;
-  grid-template-columns: auto auto;
-  padding: 10px;
+    display: grid;
+    grid-template-columns: auto;
+    padding: 10px;
+    justify-items: center;
+    overflow-y: scroll;
 }
 
 .note {
@@ -200,19 +201,20 @@ h1 {
     height: inherit;
     width: inherit;
     border-radius: 5px;
-    box-shadow: 0px 0px 40px 6px #91806f, inset 0 0 27px 0px #a89582;
+    box-shadow: 0px 0px 25px 6px #91806f, inset 0 0 27px 0px #a89582;
     background-image: url(/static/paper2.jpg);
     transition-duration: 0.2s;
+    overflow: hidden;
 }
 
 .note p {
-    margin-top: 7.5vw;
+    margin-top: 43px;
     text-align: center;
     transform: translate(0,-54%)scaleY(0.9);
     font-family: "Open Sans",sans-serif;
     font-size: x-large;
-    width: 22vw;
-    padding-left: 0.5vw;
+    width: 445px;
+    margin-bottom: 0px;
 }
 
 .note:hover {

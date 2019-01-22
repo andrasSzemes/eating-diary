@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' defer></script>
     <script type="module" src="/static/modules/noteFunctions.js"></script>
+    <script type="module" src="/static/modules/notePlacement.js"></script>
     <script type="module" src="/static/topic.js"></script>
 </head>
 <body>
@@ -46,12 +47,7 @@
         <img id="down-arrow1" src="/static/sort-down-solid.svg">
     </div>
     <div id="right-side">
-        {{ all_notes_for_topic }}
         <div class="grid-container">
-            {% for i in range(50) %}
-                <div class="grid-item" hidden>
-                </div>
-            {% endfor %}
         </div>
     </div>
     <div id="opened-note" hidden>

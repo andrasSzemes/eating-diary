@@ -1,4 +1,5 @@
 import {editNote, openNote, closeOpenedNote, saveNote} from '/static/modules/noteFunctions.js';
+import {makeSubtopicButtonsWork, getNotesForSubtopic} from '/static/modules/notePlacement.js';
 
 let sendNewPositions = function() {
     let positionForEachHeader = getPositionForEachHeader();
@@ -28,15 +29,7 @@ let getPositionForEachHeader = function() {
 
 dragula(Array.from(document.getElementsByClassName('grid-item'))).on('drop', sendNewPositions);
 
-let emptyAllPlaces = function() {
-    let gridItems = document.getElementsByClassName('grid-item');
-
-    let gridItem = '';
-    for (gridItem of gridItems) {
-        gridItem.innerHTML = '';
-    }
-};
-
+/*
 let loadNotes = function() {
     emptyAllPlaces();
     loadNotes.subtopic = event.target.dataset.subtopicLink ? event.target.dataset.subtopicLink : loadNotes.subtopic;
@@ -66,6 +59,7 @@ let loadNotes = function() {
         }
     });
 };
+*/
 
 let createNewNotePlace = function(GridItem) {
     GridItem.removeAttribute('hidden');
@@ -73,15 +67,15 @@ let createNewNotePlace = function(GridItem) {
 
     addClassForHover(GridItem, 'new-note');
 
-    GridItem.addEventListener('click', showEmptyHeader);
+    GridItem.addEventListener('click', createEmptyHeader);
     GridItem.addEventListener('keydown', addNewNoteHeader)
 };
 
-let showEmptyHeader = function() {
+let createEmptyHeader = function() {
     event.target.innerHTML = '<div class="note"><textarea class="new-note-textarea" spellcheck="false"></textarea></div>';
     let input = event.target.getElementsByTagName('textarea')[0];
     input.focus();
-    event.target.removeEventListener('click', showEmptyHeader)
+    event.target.removeEventListener('click', createEmptyHeader)
 };
 
 // This was the worst part, first time to have problem with time =)
@@ -137,22 +131,7 @@ let addClassForHover = function(element, classToAdd) {
     });
 };
 
-let hideUnnecessaryGridItems = function(startIndex, endIndex) {
-    let gridItems = document.getElementsByClassName('grid-item');
-    for (let i=startIndex; i < endIndex; i++) {
-        gridItems[i].setAttribute('hidden', '')
-    }
-};
-
-let inicialisesubtopicButtons = function() {
-    let subtopicButtons = document.getElementsByClassName('subtopic');
-    let subtopicButton = '';
-    for (subtopicButton of subtopicButtons) {
-        subtopicButton.addEventListener('click', loadNotes)
-    }
-};
-
-let inicialiseOpenedNote = function() {
+let makeNoteFunctionsWork = function() {
     let closeButton = document.getElementById('opened-note').getElementsByTagName('img')[0];
     closeButton.addEventListener('click', closeOpenedNote);
 
@@ -160,7 +139,7 @@ let inicialiseOpenedNote = function() {
     editButton.addEventListener('click', editNote);
 
     let saveButton = document.getElementById('opened-note').getElementsByTagName('img')[2];
-    saveNote.endFunction = loadNotes;
+    saveNote.endFunction = getNotesForSubtopic;
     saveButton.addEventListener('click', saveNote)
 };
 
@@ -168,6 +147,6 @@ let inicialiseOpenedNote = function() {
 window.addEventListener('load', function () {
     let logo = document.getElementsByClassName("box")[0];
     logo.style.opacity = 1;
-    inicialisesubtopicButtons();
-    inicialiseOpenedNote();
+    makeNoteFunctionsWork();
+    makeSubtopicButtonsWork()
 });
