@@ -133,23 +133,6 @@ h1 {
     overflow-x: hidden;
 }
 
-#up-arrow1 {
-    position: fixed;
-    width: 6vw;
-    opacity: 0.4;
-    left: 13.5vw;
-    transform: translate(-50%,-24%);
-}
-
-#down-arrow1 {
-    position: fixed;
-    width: 6vw;
-    opacity: 0.4;
-    left: 13.5vw;
-    transform: translate(-50%,-54%);
-    top: 92%;
-}
-
 .subtopic {
     background-color: #8e7e6d;
     box-shadow: 0px 0px 20px 5px #a89582, inset 0 0 32px 0px #5f5f5f;
