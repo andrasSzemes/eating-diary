@@ -23,22 +23,25 @@ let addNewNoteHeader = function(event) {
         sendingData['subtopic_name_as_link'] = getNotesForSubtopic.subtopic;
         sendingData['position'] = numberOfSubtopicNotes() + 1;
 
-        getNumberOfNotes();
-        let firstNumber = getNumberOfNotes.number;
+        //getNumberOfNotes();
+        //let firstNumber = getNumberOfNotes.number;
 
         $.ajax({
           type: "POST",
           url: "/add-new-note-header",
           data: sendingData,
-          success: null,
+          async: false,
+          success: function () {
+              console.log('A');
+          },
           dataType: 'string'
         });
 
-        let secondNumber = 0;
-        while (secondNumber != firstNumber + 1) {
-            getNumberOfNotes();
-            secondNumber = getNumberOfNotes.number;
-        }
+        // let secondNumber = 0;
+        // while (secondNumber != firstNumber + 1) {
+        //     getNumberOfNotes();
+        //     secondNumber = getNumberOfNotes.number;
+        // }
 
         getNotesForSubtopic();
         let newNoteContainer = document.getElementsByClassName('new-note-container')[0];
@@ -55,9 +58,11 @@ let getNumberOfNotes = function() {
         async: false,
         success: function(response) {
             getNumberOfNotes.number = response['number_of_notes'];
+            console.log(getNumberOfNotes.number);
         }
     });
 };
+//TODO fetch MDN, .log
 
 let addClassForHover = function(element, classToAdd) {
     element.addEventListener('mouseenter', function() {

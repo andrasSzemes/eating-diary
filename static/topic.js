@@ -1,7 +1,8 @@
-import {editNote, openNote, closeOpenedNote, saveNote} from '/static/modules/noteFunctions.js';
-import {makeSubtopicButtonsWork, getNotesForSubtopic} from '/static/modules/notePlacement.js';
+import {closeOpenedNote, editNote, saveNote} from '/static/modules/noteFunctions.js';
+import {getNotesForSubtopic, makeSubtopicButtonsWork} from '/static/modules/notePlacement.js';
 import {makeNewNoteWork} from '/static/modules/newNote.js';
 
+/*
 let sendNewPositions = function() {
     let positionForEachHeader = getPositionForEachHeader();
 
@@ -29,22 +30,27 @@ let getPositionForEachHeader = function() {
 };
 
 dragula(Array.from(document.getElementsByClassName('grid-item'))).on('drop', sendNewPositions);
+*/
 
 let makeNoteFunctionsWork = function() {
-    let closeButton = document.getElementById('opened-note').getElementsByTagName('img')[0];
-    closeButton.addEventListener('click', closeOpenedNote);
+    let buttons = document.getElementById('opened-note').getElementsByTagName('img');
 
-    let editButton = document.getElementById('opened-note').getElementsByTagName('img')[1];
-    editButton.addEventListener('click', editNote);
+    buttons[0].addEventListener('click', closeOpenedNote);
 
-    let saveButton = document.getElementById('opened-note').getElementsByTagName('img')[2];
-    saveNote.endFunction = getNotesForSubtopic;
-    saveButton.addEventListener('click', saveNote)
+    buttons[1].addEventListener('click', editNote);
+
+    buttons[2].addEventListener('click', () => {
+        saveNote.endFunction = getNotesForSubtopic;
+        saveNote()
+    })
+    // TODO inline, add parameter to callback
 };
 
 
 window.addEventListener('load', function () {
-    let logo = document.getElementsByClassName("box")[0];
+
+    let logo = document.querySelector('.box');
+    //TODO querySelector, canIUse.com
     logo.style.opacity = 1;
     makeNoteFunctionsWork();
     makeSubtopicButtonsWork();

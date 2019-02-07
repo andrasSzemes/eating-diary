@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import data_manager
 import json
 
@@ -22,7 +22,7 @@ def add_note():
         return redirect(url_for("index"))
     else:
         return render_template('add_note.html')
-    
+
 
 @app.route('/delete-note/<note_id>')
 def delete_note(note_id):
@@ -103,7 +103,8 @@ def get_subtopic_notes(subtopic):
 def update_positions():
     new_positions = request.form.to_dict()
     data_manager.update_note_position(new_positions)
-    return ''
+    return jsonify(status='OK')
+#TODO status='OK'
 
 
 @app.route('/update-body', methods=['POST'])
@@ -123,11 +124,13 @@ def add_new_note_header():
     data_manager.add_new_note_header(new_data)
     return ''
 
+
 @app.route('/show-actual-number-of-notes')
 def show_actual_number_of_notes():
     number_of_notes_dict = data_manager.get_how_many_notes_are()
     print(number_of_notes_dict)
-    return json.dumps(number_of_notes_dict)
+    return jsonify(number_of_notes_dict)
+#TODO jsonify
 
 
 if __name__ == '__main__':
@@ -135,3 +138,6 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0',
             port=4000,
             debug=True)
+
+
+#TODO images directory
