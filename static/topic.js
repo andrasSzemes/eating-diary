@@ -51,7 +51,6 @@ window.addEventListener('load', function () {
 
     let logo = document.querySelector('.box');
     //TODO querySelector, canIUse.com
-    logo.style.opacity = 1;
     makeNoteFunctionsWork();
     makeSubtopicButtonsWork();
     makeNewNoteWork();
