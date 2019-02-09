@@ -1,4 +1,4 @@
-import {getNotesForSubtopic} from '/static/modules/notePlacement.js';
+import {getNotesForSubtopic} from '/static/js_modules/notePlacement.js';
 
 let createEmptyHeader = function() {
     event.target.innerHTML = '<div class="note"><textarea class="new-note-textarea" spellcheck="false"></textarea></div>';

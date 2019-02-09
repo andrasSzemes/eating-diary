@@ -1,6 +1,6 @@
-import {closeOpenedNote, editNote, saveNote} from '/static/modules/noteFunctions.js';
-import {getNotesForSubtopic, makeSubtopicButtonsWork} from '/static/modules/notePlacement.js';
-import {makeNewNoteWork} from '/static/modules/newNote.js';
+import {closeOpenedNote, editNote, saveNote} from '/static/js_modules/noteFunctions.js';
+import {getNotesForSubtopic, makeSubtopicButtonsWork} from '/static/js_modules/notePlacement.js';
+import {makeNewNoteWork} from '/static/js_modules/newNote.js';
 
 /*
 let sendNewPositions = function() {

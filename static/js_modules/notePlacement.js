@@ -1,4 +1,4 @@
-import {openNote} from '/static/modules/noteFunctions.js';
+import {openNote} from '/static/js_modules/noteFunctions.js';
 
 
 let appendNotePlace = function(containerToAppend, howManyTimes) {
