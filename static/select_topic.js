@@ -16,6 +16,7 @@ for (const iconElement of iconElements) {
             for (const iconElem of iconElements) {
                 if (iconElement !== iconElem) {
                     iconElem.removeAttribute('hidden');
+                    iconElem.classList.remove('inicial-icon-height');
                     setTimeout(() => {
                         iconElem.style.opacity=0.7
                     }, 50)
@@ -28,6 +29,7 @@ for (const iconElement of iconElements) {
             for (const iconElem of iconElements) {
                 if (iconElement !== iconElem) {
                     iconElem.style.opacity=0;
+                    iconElem.classList.add('inicial-icon-height');
                     setTimeout(() => {
                         iconElem.setAttribute('hidden', '')
                     }, 400)
