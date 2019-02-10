@@ -8,27 +8,32 @@
 </head>
 <body>
     <h1>Choose^ A^ Subject^</h1>
-        <div id="JS-logo" class="box">
-            <p class="centralise">JS</p>
-        </div>
-        <div id="git-logo" class="box">
-            <img src="/static/logo_icons/git-icon.png" class="centralise" draggable="false">
-        </div>
-        <div id="security-logo" class="box">
-            <img src="/static/logo_icons/user-secret-solid.svg" class="centralise" draggable="false">
-        </div>
-        <div id="UIUX-logo" class="box">
-            <img src="/static/logo_icons/UIUX-logo.png" class="centralise" draggable="false">
-        </div>
-        <div id="note-logo" class="box">
-            <img src="/static/logo_icons/sticky-note-regular.svg" class="centralise" draggable="false">
-        </div>
-        <div id="algorithm-logo" class="box">
-            <img src="/static/logo_icons/algorithm-logo.jpg" class="centralise" draggable="false">
-        </div>
-        <div id="sql-logo" class="box">
-            <img src="/static/logo_icons/sql-logo.png" class="centralise" draggable="false">
-        </div>
+    <div id="JS-logo" class="box" data-topic-name="java-script">
+        <p class="centralise">JS</p>
+    </div>
+    <div id="git-logo" class="box" data-topic-name="git">
+        <img src="/static/logo_icons/git-icon.png" class="centralise" draggable="false">
+    </div>
+    <div id="security-logo" class="box" data-topic-name="security">
+        <img src="/static/logo_icons/user-secret-solid.svg" class="centralise" draggable="false">
+    </div>
+    <div id="UIUX-logo" class="box" data-topic-name="ux-and-ui">
+        <img src="/static/logo_icons/UIUX-logo.png" class="centralise" draggable="false">
+    </div>
+    <div id="note-logo" class="box" data-topic-name="notes">
+        <img src="/static/logo_icons/sticky-note-regular.svg" class="centralise" draggable="false">
+    </div>
+    <div id="algorithm-logo" class="box" data-topic-name="algorithm">
+        <img src="/static/logo_icons/algorithm-logo.jpg" class="centralise" draggable="false">
+    </div>
+    <div id="sql-logo" class="box" data-topic-name="sql">
+        <img src="/static/logo_icons/sql-logo.png" class="centralise" draggable="false">
+    </div>
+    <div id="subtopics-container">
+        {% for subtopic in subtopics_for_topic %}
+            <div class="subtopic" data-subtopic-link={{ subtopic.subtopic_name_as_link }}>{{ subtopic.subtopic_name }}</div>
+        {% endfor %}
+    </div>
 <!-- https://fontawesome.com/license -->
 </body>
 </html>

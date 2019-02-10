@@ -16,6 +16,13 @@ def render_notes_of_topic(topic):
     return render_template('topic.html', subtopics_for_topic=subtopics_for_topic, topic=topic)
 
 
+@app.route('/subtopic', methods=['POST'])
+def send_subtopics_back():
+    topic = request.get_json()
+    subtopics_for_topic = data_manager.get_subtopics_for_topic(topic)
+    return jsonify(subtopics_for_topic)
+
+
 @app.route('/subtopic/<subtopic>')
 def return_subtopic_notes(subtopic):
     notes_for_subtopic = data_manager.get_notes_for_subtopic(subtopic)
