@@ -46,7 +46,7 @@ body {
     transform: translate(-50%,-50%);
 }
 
-.inicial-icon-height{
+.first-icon-row-height{
     top: 30vh !important;
     transition: all 0.4s ease-in-out;
 }
