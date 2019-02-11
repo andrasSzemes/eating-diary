@@ -23,7 +23,7 @@ def return_subtopic_notes(subtopic):
 
 
 @app.route('/update-body', methods=['POST'])
-def update_body():
+def update_note_body():
     new_data = request.get_json()
     data_manager.update_note_body(new_data)
     return jsonify({'OK': True})
@@ -37,13 +37,6 @@ def add_new_note_header():
 
     data_manager.add_new_note_header(new_data)
     return jsonify({'OK': True})
-
-
-@app.route('/show-actual-number-of-notes')
-def return_actual_number_of_notes():
-    number_of_notes_dict = data_manager.get_how_many_notes_are()
-    print(number_of_notes_dict)
-    return jsonify(number_of_notes_dict)
 
 
 if __name__ == '__main__':

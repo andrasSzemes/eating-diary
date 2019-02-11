@@ -18,50 +18,12 @@ def delete_note(cursor, note_id):
                    {'note_id' : note_id})
 
 
-#Currently not used in the application
-@connection.connection_handler
-def archive_pomodoro(cursor, subtopic):
-    cursor.execute("""
-                    INSERT INTO pomodoro
-                    (subtopic)
-                    VALUES (%(subtopic)s)
-                    """,
-                   {'subtopic': subtopic})
-
-
-#Currently not used in the application
-@connection.connection_handler
-def pomodoro_count_today(cursor):
-    cursor.execute("""
-                    SELECT count(*) AS pomodoros_today
-                    FROM pomodoro
-                    WHERE EXTRACT(YEAR FROM done_date) = EXTRACT(YEAR FROM now()) AND
-                          EXTRACT(MONTH FROM done_date) = EXTRACT(MONTH FROM now()) AND
-                          EXTRACT(DAY FROM done_date) = EXTRACT(DAY FROM now())
-                    """)
-
-    return cursor.fetchone()['pomodoros_today']
-
-
 @connection.connection_handler
 def get_subtopics_for_topic(cursor, topic):
     cursor.execute("""
                     SELECT subtopic_name, subtopic_name_as_link
                     FROM subtopics
                     WHERE topic_name = %(topic)s
-                    """,
-                   {'topic': topic})
-
-    return cursor.fetchall()
-
-
-@connection.connection_handler
-def get_all_notes_for_topic(cursor, topic):
-    cursor.execute("""
-                    SELECT notes.*, subtopics.subtopic_name
-                    FROM notes
-                    LEFT JOIN subtopics ON notes.subtopic_id = subtopics.subtopic_id
-                    WHERE subtopics.topic_name = %(topic)s
                     """,
                    {'topic': topic})
 
@@ -124,12 +86,3 @@ def get_subtopic_id_by_link_name(cursor, subtopicNameAsLink):
                     """,
                    {'subtopic_name_as_link': subtopicNameAsLink})
     return cursor.fetchone()['subtopic_id']
-
-
-@connection.connection_handler
-def get_how_many_notes_are(cursor):
-    cursor.execute("""
-                    SELECT count(id) AS number_of_notes
-                    FROM notes
-                    """)
-    return cursor.fetchone()
