@@ -35,7 +35,6 @@ body {
 
 .box:hover {
     transition-duration: 0.5s;
-    box-shadow: 0 0 51px 15px #a89582;
     opacity: 1 !important;
 }
 
@@ -46,9 +45,16 @@ body {
     transform: translate(-50%,-50%);
 }
 
-.first-icon-row-height{
+.pseudo-remove-logos {
+    opacity: 0 !important;
     top: 30vh !important;
     transition: all 0.4s ease-in-out;
+    cursor: default;
+    pointer-events: none;
+}
+
+.pseudo-remove-logos:hover {
+    opacity: 0 !important;
 }
 
 .place-icon-top-left {

@@ -37,8 +37,8 @@ export const changeToTopicsLayout = function(iconElement, iconElements) {
     for (const iconElementB of iconElements) {
         if (iconElement !== iconElementB) {
             hideIcon(iconElementB, false);
-            iconElementB.classList.remove('first-icon-row-height');
-            setTimeout(() => show(iconElementB, 0.7), 50)
+            iconElementB.classList.remove('pseudo-remove-logos');
+            show(iconElementB, 0.7)
         }
     }
 
@@ -51,11 +51,9 @@ export const changeToNotesLayout = function(iconElement, iconElements) {
 
     iconElement.classList.add('place-icon-top-left');
 
-    for (const iconElem of iconElements) {
-        if (iconElement !== iconElem) {
-            show(iconElem, 0);
-            iconElem.classList.add('first-icon-row-height');
-            setTimeout(() => hideIcon(iconElem, true), 400)
+    for (const iconElementB of iconElements) {
+        if (iconElement !== iconElementB) {
+            iconElementB.classList.add('pseudo-remove-logos');
         }
     }
 

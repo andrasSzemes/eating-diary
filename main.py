@@ -1,19 +1,12 @@
-from flask import Flask, render_template, request, session, jsonify
+from flask import Flask, render_template, request, jsonify
 import data_manager
-import json
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def select_topic():
-    return render_template('select_topic.html')
-
-
-@app.route('/<topic>')
-def render_notes_of_topic(topic):
-    subtopics_for_topic = data_manager.get_subtopics_for_topic(topic)
-    return render_template('topic.html', subtopics_for_topic=subtopics_for_topic, topic=topic)
+    return render_template('main.html')
 
 
 @app.route('/subtopic', methods=['POST'])
@@ -26,15 +19,7 @@ def send_subtopics_back():
 @app.route('/subtopic/<subtopic>')
 def return_subtopic_notes(subtopic):
     notes_for_subtopic = data_manager.get_notes_for_subtopic(subtopic)
-    return json.dumps(notes_for_subtopic)
-
-
-# @app.route('/update-positions', methods=['POST'])
-# def update_positions():
-#     new_positions = request.form.to_dict()
-#     data_manager.update_note_position(new_positions)
-#     return jsonify(status='OK')
-#     #TODO status='OK'
+    return jsonify(notes_for_subtopic)
 
 
 @app.route('/update-body', methods=['POST'])
@@ -59,21 +44,6 @@ def return_actual_number_of_notes():
     number_of_notes_dict = data_manager.get_how_many_notes_are()
     print(number_of_notes_dict)
     return jsonify(number_of_notes_dict)
-    #TODO jsonify
-
-
-# #TODO pomodoro need new logic to work
-# @app.route('/count-pomodoro')
-# def count_pomodoro():
-#     """Here comes the new logic"""
-#     return ''
-
-
-# #TODO .sql is greater than csv, it should be used instead
-# @app.route('/back-up')
-# def back_up():
-#     """Here comes new logic"""
-#     return ''
 
 
 if __name__ == '__main__':
@@ -84,3 +54,4 @@ if __name__ == '__main__':
 
 
 # TODO show which subtopic are you using
+# TODO create automatic .sql backup on regular basis
