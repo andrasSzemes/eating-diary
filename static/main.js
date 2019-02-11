@@ -2,6 +2,7 @@ import {changeToTopicsLayout, changeToNotesLayout} from './js_modules/iconFuncti
 import {closeOpenedNote, editNote, saveNote} from "./js_modules/noteFunctions.js";
 import {getNotesForSubtopic} from "./js_modules/notePlacement.js";
 import {makeNewNoteWork} from "./js_modules/newNote.js";
+import {showHideLoginModal, handleUserInput} from "./js_modules/authorization.js";
 
 
 const handleIconClick = function () {
@@ -34,9 +35,15 @@ const makeNoteFunctionsWork = function() {
     // TODO inline, add parameter to callback
 };
 
+const makeAuthorizationWork = function() {
+    showHideLoginModal();
+    handleUserInput()
+};
+
 
 window.addEventListener('load', function () {
     handleIconClick();
     makeNoteFunctionsWork();
-    makeNewNoteWork()
+    makeNewNoteWork();
+    makeAuthorizationWork()
 })

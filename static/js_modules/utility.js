@@ -21,3 +21,9 @@ export function hide(domElement) {
 export function reveal(domElement) {
     domElement.removeAttribute('hidden')
 }
+
+export function isEnterPressed(key, callback) {
+    if (event.key === 'Enter') {
+        callback()
+    }
+}

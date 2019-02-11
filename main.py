@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 import data_manager
 
 app = Flask(__name__)
@@ -37,6 +37,18 @@ def add_new_note_header():
 
     data_manager.add_new_note_header(new_data)
     return jsonify({'OK': True})
+
+
+@app.route('/authenticate', methods=['POST'])
+def authenticate():
+    userdata = request.get_json()
+    hashed_password = data_manager.get_hashed_password(userdata['username'])
+    is_matching = data_manager.verify_password(userdata['password'], hashed_password) if hashed_password else False
+
+    if is_matching:
+        return jsonify({'OK': True})
+    else:
+        return jsonify({'OK': False})
 
 
 if __name__ == '__main__':

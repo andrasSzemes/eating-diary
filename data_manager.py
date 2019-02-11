@@ -6,6 +6,7 @@ import connection
 from time import strftime
 import os
 import time
+import bcrypt
 
 
 #Currently not used in the application
@@ -86,3 +87,21 @@ def get_subtopic_id_by_link_name(cursor, subtopicNameAsLink):
                     """,
                    {'subtopic_name_as_link': subtopicNameAsLink})
     return cursor.fetchone()['subtopic_id']
+
+
+@connection.connection_handler
+def get_hashed_password(cursor, username):
+    cursor.execute("""
+                    SELECT hashed_password
+                    FROM users_data
+                    WHERE username = %(username)s
+                    """,
+                   {'username': username})
+
+    result = cursor.fetchone()
+    return result['hashed_password'] if result else None
+
+
+def verify_password(plain_text_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
