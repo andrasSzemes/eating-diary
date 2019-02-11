@@ -367,6 +367,11 @@ h1 {
     resize: none;
 }
 
+.chosen-subtopic {
+    color: #fceb83;
+    opacity: 1;
+}
+
 ::-webkit-scrollbar {
   -webkit-appearance: inherit;
   width: 7px;

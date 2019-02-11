@@ -12,6 +12,13 @@ const appendNotePlace = function(containerToAppend, howManyTimes) {
     }
 };
 
+const handleSubtopicHighlight = function (subtopicElement) {
+    if (document.querySelector('.chosen-subtopic')) {
+        document.querySelector('.chosen-subtopic').classList.remove('chosen-subtopic');  //remove highlight from previous subtopic
+    }
+    subtopicElement.classList.add('chosen-subtopic') //highlight actual subtopic
+};
+
 const loadNotesForSubtopic = function(notes) {
     const container = document.querySelector('.grid-container');
     container.innerHTML = '';
@@ -34,6 +41,7 @@ export const getNotesForSubtopic = function(endFunction) {
 
     if (event) {
         getNotesForSubtopic.subtopic = event.target.dataset.subtopicLink ? event.target.dataset.subtopicLink : getNotesForSubtopic.subtopic;
+        handleSubtopicHighlight(event.target)
     }
 
     fetch('/subtopic/' + getNotesForSubtopic.subtopic)
