@@ -6,7 +6,7 @@ const placeRelatedSubtopics = function(subtopics) {
     subtopicsContainer.innerHTML = '';
     subtopicsContainer.style.transitionDelay = '0.3s';
     subtopicsContainer.style.transitionDuration = '0.2s';
-    subtopicsContainer.style.transform = 'translate(0, 0)';
+    subtopicsContainer.style.transform = 'translate(40px, 0)';
 
     for (const subtopic of subtopics) {
         const subtopicElement = document.createElement('div');

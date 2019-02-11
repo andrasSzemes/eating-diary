@@ -36,7 +36,7 @@ body {
 .box:hover {
     transition-duration: 0.5s;
     box-shadow: 0 0 51px 15px #a89582;
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 .centralise {
@@ -53,7 +53,7 @@ body {
 
 .place-icon-top-left {
     opacity: 1 !important;
-    left: 50px !important;
+    left: 100px !important;
     top: 50px !important;
     transform: translate(0,0) !important;
     margin: 0;
@@ -195,6 +195,7 @@ h1 {
     transition-duration: 0.5s;
     text-align: center;
     transform: skewX(-12deg) scaleY(0.9);
+    cursor: pointer;
 }
 
 .subtopic:hover {
