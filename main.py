@@ -46,12 +46,12 @@ def update_body():
 
 @app.route('/add-new-note-header', methods=['POST'])
 def add_new_note_header():
-    new_data = request.form.to_dict()
+    new_data = request.get_json()
     subtopic_id = data_manager.get_subtopic_id_by_link_name(new_data['subtopic_name_as_link'])
     new_data['subtopic_id'] = subtopic_id
 
     data_manager.add_new_note_header(new_data)
-    return ''
+    return jsonify({'OK': True})
 
 
 @app.route('/show-actual-number-of-notes')

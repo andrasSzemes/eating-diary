@@ -1,4 +1,5 @@
 import {getNotesForSubtopic} from '/static/js_modules/notePlacement.js';
+import {postData} from "./utility.js";
 
 let createEmptyHeader = function() {
     event.target.innerHTML = '<div class="note"><textarea class="new-note-textarea" spellcheck="false"></textarea></div>';
@@ -23,31 +24,13 @@ let addNewNoteHeader = function(event) {
         sendingData['subtopic_name_as_link'] = getNotesForSubtopic.subtopic;
         sendingData['position'] = numberOfSubtopicNotes() + 1;
 
-        //getNumberOfNotes();
-        //let firstNumber = getNumberOfNotes.number;
-
-        $.ajax({
-          type: "POST",
-          url: "/add-new-note-header",
-          data: sendingData,
-          async: false,
-          success: function () {
-              console.log('A');
-          },
-          dataType: 'string'
+        postData("/add-new-note-header", sendingData, (response) => {
+            getNotesForSubtopic();
+            let newNoteContainer = document.getElementsByClassName('new-note-container')[0];
+            let newNotePlace = newNoteContainer.getElementsByClassName('grid-item')[0];
+            newNotePlace.innerHTML = '';
+            newNotePlace.addEventListener('click', createEmptyHeader);
         });
-
-        // let secondNumber = 0;
-        // while (secondNumber != firstNumber + 1) {
-        //     getNumberOfNotes();
-        //     secondNumber = getNumberOfNotes.number;
-        // }
-
-        getNotesForSubtopic();
-        let newNoteContainer = document.getElementsByClassName('new-note-container')[0];
-        let newNotePlace = newNoteContainer.getElementsByClassName('grid-item')[0];
-        newNotePlace.innerHTML = '';
-        newNotePlace.addEventListener('click', createEmptyHeader);
     }
 };
 
@@ -62,7 +45,6 @@ let getNumberOfNotes = function() {
         }
     });
 };
-//TODO fetch MDN, .log
 
 let addClassForHover = function(element, classToAdd) {
     element.addEventListener('mouseenter', function() {

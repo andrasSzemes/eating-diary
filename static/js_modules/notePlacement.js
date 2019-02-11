@@ -39,7 +39,9 @@ let showNewNotePlace = function() {
 export let getNotesForSubtopic = function(endFunction) {
     getNotesForSubtopic.endFunction = loadNotesForSubtopic;
 
-    getNotesForSubtopic.subtopic = event.target.dataset.subtopicLink ? event.target.dataset.subtopicLink : getNotesForSubtopic.subtopic;
+    if (event) {
+        getNotesForSubtopic.subtopic = event.target.dataset.subtopicLink ? event.target.dataset.subtopicLink : getNotesForSubtopic.subtopic;
+    }
 
     fetch('/subtopic/' + getNotesForSubtopic.subtopic)
     .then((response) => response.json())
