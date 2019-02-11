@@ -1,5 +1,6 @@
-import {hideIcon, postData, show} from "./utility.js";
+import {hide, reveal, postData, show} from "./utility.js";
 import {makeSubtopicButtonsWork} from './notePlacement.js';
+
 
 const placeRelatedSubtopics = function(subtopics) {
     const subtopicsContainer = document.querySelector('#subtopics-container');
@@ -36,7 +37,7 @@ export const changeToTopicsLayout = function(iconElement, iconElements) {
 
     for (const iconElementB of iconElements) {
         if (iconElement !== iconElementB) {
-            hideIcon(iconElementB, false);
+            reveal(iconElementB);
             iconElementB.classList.remove('pseudo-remove-logos');
             show(iconElementB, 0.7)
         }

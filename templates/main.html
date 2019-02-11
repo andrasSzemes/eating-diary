@@ -35,19 +35,17 @@
         <div class="grid-container">
         </div>
         <div class="new-note-container">
-            <div class="grid-item" hidden></div>
+            <div id="new-note-place" class="grid-item" hidden></div>
         </div>
     </div>
     <div id="opened-note" hidden>
         <div id="opened-header">
-            <img src="/static/button_icons/window-close-solid.svg">
-            <img src="/static/button_icons/edit-solid.svg">
-            <img src="/static/button_icons/save-regular.svg" hidden>
+            <img src="/static/button_icons/close.svg" id="close-note-icon">
+            <img src="/static/button_icons/edit.svg" id="edit-note-icon">
+            <img src="/static/button_icons/save.svg" id="save-note-icon" hidden>
             <p></p>
         </div>
-        <div id="opened-body">
-            <textarea readonly spellcheck="false"></textarea>
-        </div>
+        <textarea id="note-body" readonly spellcheck="false"></textarea>
     </div>
 <!-- https://fontawesome.com/license -->
 </body>

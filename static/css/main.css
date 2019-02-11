@@ -331,12 +331,7 @@ h1 {
     transform: translate(-126%,0);
 }
 
-#opened-body {
-    padding: 10px 0px;
-    padding-left: 20px;
-}
-
-#opened-body textarea{
+#note-body {
     width: -webkit-fill-available;
     height: 74vh;
     resize: none;
@@ -348,9 +343,11 @@ h1 {
     cursor: default;
     border-radius: 8px;
     padding-right: 20px;
+    margin: 10px 0;
+    margin-left: 20px;
 }
 
-.new-note {
+#new-note-place:hover {
     cursor: text;
     background-image: url(/static/paper2.jpg);
     transition-duration: 0.2s;

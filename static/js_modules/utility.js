@@ -14,10 +14,10 @@ export function show(domElement, opacity=1) {
     domElement.style.opacity = opacity.toString()
 }
 
-export function hideIcon(domElement, boolean=true) {
-    if (boolean) {
-        domElement.setAttribute('hidden', '')
-    } else {
-        domElement.removeAttribute('hidden')
-    }
+export function hide(domElement) {
+    domElement.setAttribute('hidden', '')
+}
+
+export function reveal(domElement) {
+    domElement.removeAttribute('hidden')
 }
