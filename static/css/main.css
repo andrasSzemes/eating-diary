@@ -372,6 +372,45 @@ h1 {
     opacity: 1;
 }
 
+#sign-in-icon {
+    height: 60px;
+    position: fixed;
+    left: 10px;
+    top: 0;
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+#login-modal-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+#login-modal {
+    background-color: antiquewhite;
+    height: 120px;
+    width: 400px;
+    left: 50%;
+    top: 50%;
+    position: fixed;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    box-shadow: 0 0 30px 0 bisque;
+}
+
+#login-modal input {
+    font-size: xx-large;
+    width: -webkit-fill-available;
+    text-align: center;
+    margin-top: 36px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
 ::-webkit-scrollbar {
   -webkit-appearance: inherit;
   width: 7px;
