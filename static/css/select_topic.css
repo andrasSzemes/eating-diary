@@ -179,6 +179,7 @@ h1 {
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
+    top: 0;
 }
 
 .subtopic {

@@ -1,4 +1,5 @@
 import {hideIcon, postData, show} from "./utility.js";
+import {makeSubtopicButtonsWork} from './notePlacement.js';
 
 const placeRelatedSubtopics = function(subtopics) {
     const subtopicsContainer = document.querySelector('#subtopics-container');
@@ -15,6 +16,8 @@ const placeRelatedSubtopics = function(subtopics) {
 
         subtopicsContainer.appendChild(subtopicElement)
     }
+
+    makeSubtopicButtonsWork()
 };
 
 const removeRelatedSubtopics = function() {
@@ -25,6 +28,7 @@ const removeRelatedSubtopics = function() {
 };
 
 export const changeToTopicsLayout = function(iconElement, iconElements) {
+    document.querySelector('#right-side').setAttribute('hidden', '');
     const chooseSubjectText = document.querySelector('h1');
     show(chooseSubjectText);
 

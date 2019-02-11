@@ -41,20 +41,18 @@ export let getNotesForSubtopic = function(endFunction) {
 
     getNotesForSubtopic.subtopic = event.target.dataset.subtopicLink ? event.target.dataset.subtopicLink : getNotesForSubtopic.subtopic;
 
-    $.ajax({
-        dataType: "json",
-        url: '/subtopic/' + getNotesForSubtopic.subtopic,
-        success: function (response) {
-            getNotesForSubtopic.endFunction(response);
-            showNewNotePlace()
-        }
+    fetch('/subtopic/' + getNotesForSubtopic.subtopic)
+    .then((response) => response.json())
+    .then((response) => {
+        document.querySelector('#right-side').removeAttribute('hidden');
+        getNotesForSubtopic.endFunction(response);
+        showNewNotePlace()
     });
 };
 
 export let makeSubtopicButtonsWork = function() {
     let subtopicButtons = document.getElementsByClassName('subtopic');
-    let subtopicButton = '';
-    for (subtopicButton of subtopicButtons) {
+    for (const subtopicButton of subtopicButtons) {
         subtopicButton.addEventListener('click', getNotesForSubtopic)
     }
 };
