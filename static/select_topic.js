@@ -1,4 +1,7 @@
 import {changeToTopicsLayout, changeToNotesLayout} from './js_modules/iconFunctions.js'
+import {closeOpenedNote, editNote, saveNote} from "./js_modules/noteFunctions.js";
+import {getNotesForSubtopic} from "./js_modules/notePlacement.js";
+
 
 const handleIconClick = function () {
     const iconElements = document.querySelectorAll("[id$='-logo']");
@@ -16,4 +19,19 @@ const handleIconClick = function () {
     }
 };
 
-handleIconClick()
+let makeNoteFunctionsWork = function() {
+    let buttons = document.getElementById('opened-note').getElementsByTagName('img');
+
+    buttons[0].addEventListener('click', closeOpenedNote);
+
+    buttons[1].addEventListener('click', editNote);
+
+    buttons[2].addEventListener('click', () => {
+        saveNote.endFunction = getNotesForSubtopic;
+        saveNote()
+    })
+    // TODO inline, add parameter to callback
+};
+
+handleIconClick();
+makeNoteFunctionsWork()

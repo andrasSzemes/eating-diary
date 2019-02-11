@@ -1,3 +1,5 @@
+import {postData} from "./utility.js";
+
 export let editNote = function() {
     let openedBody = document.getElementById('opened-body').getElementsByTagName('textarea')[0];
     openedBody.removeAttribute('readonly');
@@ -58,13 +60,7 @@ export let saveNote = function() {
     let updatedNote = {};
     updatedNote[referenceHeader] = newBody;
 
-    $.ajax({
-          type: "POST",
-          url: "/update-body",
-          data: updatedNote,
-          success: null,
-          dataType: 'json'
-    });
+    postData("/update-body", updatedNote, () => {});
 
     saveNote.endFunction()
 };

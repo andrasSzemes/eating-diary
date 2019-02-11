@@ -39,10 +39,9 @@ def return_subtopic_notes(subtopic):
 
 @app.route('/update-body', methods=['POST'])
 def update_body():
-    new_data = request.form.to_dict()
-    print(new_data)
+    new_data = request.get_json()
     data_manager.update_note_body(new_data)
-    return ''
+    return jsonify({'OK': True})
 
 
 @app.route('/add-new-note-header', methods=['POST'])
