@@ -105,3 +105,28 @@ def get_hashed_password(cursor, username):
 def verify_password(plain_text_password, hashed_password):
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
+
+
+@connection.connection_handler
+def set_authorization_hash(cursor):
+    new_hash = bcrypt.gensalt().decode("utf-8")
+
+    cursor.execute("""
+                    INSERT INTO authorize
+                    (hash)
+                    VALUES (%(new_hash)s)
+                    """,
+                   {'new_hash': new_hash})
+
+    return new_hash
+
+
+@connection.connection_handler
+def is_authorized(cursor, try_hash):
+    cursor.execute("""
+                    SELECT hash
+                    FROM authorize
+                    """)
+
+    all_hash = [dictionary['hash'] for dictionary in cursor.fetchall()]
+    return try_hash in all_hash

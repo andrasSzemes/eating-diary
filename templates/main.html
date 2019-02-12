@@ -7,7 +7,7 @@
     <script type="module" src="/static/main.js"></script>
 </head>
 <body>
-    <img id="sign-in-icon" src="/static/button_icons/sign-in.svg">
+    <img id="sign-in-icon" src="/static/button_icons/sign-in.svg" {{'hidden' if session['hash'] else ''}}>
     <h1>Choose^ A^ Subject^</h1>
     <div id="JS-logo" class="box" data-topic-name="java-script">
         <p class="centralise">JS</p>
@@ -36,13 +36,13 @@
         <div class="grid-container">
         </div>
         <div class="new-note-container">
-            <div id="new-note-place" class="grid-item" hidden></div>
+            <div id="new-note-place" class="grid-item" {{'' if session['hash'] else 'hidden'}}></div>
         </div>
     </div>
     <div id="opened-note" hidden>
         <div id="opened-header">
             <img src="/static/button_icons/close.svg" id="close-note-icon">
-            <img src="/static/button_icons/edit.svg" id="edit-note-icon">
+            <img src="/static/button_icons/edit.svg" id="edit-note-icon" {{'' if session['hash'] else 'hidden'}}>
             <img src="/static/button_icons/save.svg" id="save-note-icon" hidden>
             <p></p>
         </div>

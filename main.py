@@ -24,19 +24,25 @@ def return_subtopic_notes(subtopic):
 
 @app.route('/update-body', methods=['POST'])
 def update_note_body():
-    new_data = request.get_json()
-    data_manager.update_note_body(new_data)
-    return jsonify({'OK': True})
+    if data_manager.is_authorized(session['hash']):
+        new_data = request.get_json()
+        data_manager.update_note_body(new_data)
+        return jsonify({'OK': True})
+
+    return jsonify({'OK': False})
 
 
 @app.route('/add-new-note-header', methods=['POST'])
 def add_new_note_header():
-    new_data = request.get_json()
-    subtopic_id = data_manager.get_subtopic_id_by_link_name(new_data['subtopic_name_as_link'])
-    new_data['subtopic_id'] = subtopic_id
+    if data_manager.is_authorized(session['hash']):
+        new_data = request.get_json()
+        subtopic_id = data_manager.get_subtopic_id_by_link_name(new_data['subtopic_name_as_link'])
+        new_data['subtopic_id'] = subtopic_id
 
-    data_manager.add_new_note_header(new_data)
-    return jsonify({'OK': True})
+        data_manager.add_new_note_header(new_data)
+        return jsonify({'OK': True})
+
+    return jsonify({'OK': False})
 
 
 @app.route('/authenticate', methods=['POST'])
@@ -46,6 +52,8 @@ def authenticate():
     is_matching = data_manager.verify_password(userdata['password'], hashed_password) if hashed_password else False
 
     if is_matching:
+        new_hash = data_manager.set_authorization_hash()
+        session['hash'] = new_hash
         return jsonify({'OK': True})
     else:
         return jsonify({'OK': False})
@@ -58,5 +66,4 @@ if __name__ == '__main__':
             debug=True)
 
 
-# TODO show which subtopic are you using
 # TODO create automatic .sql backup on regular basis

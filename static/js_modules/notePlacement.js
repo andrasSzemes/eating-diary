@@ -49,7 +49,6 @@ export const getNotesForSubtopic = function(endFunction) {
     .then((response) => {
         reveal(document.querySelector('#right-side'));
         getNotesForSubtopic.endFunction(response);
-        reveal(document.querySelector('#new-note-place'))
     });
 };
 

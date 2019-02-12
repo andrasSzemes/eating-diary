@@ -16,8 +16,10 @@ export const removeUnfinishedEdit = function() {
     noteBody.setAttribute('readonly', '');
     noteBody.blur();
 
-    reveal(document.querySelector('#edit-note-icon'));
-    hide(document.querySelector('#save-note-icon'))
+    if (! document.querySelector('#save-note-icon').hasAttribute('hidden')) {
+        reveal(document.querySelector('#edit-note-icon'));
+        hide(document.querySelector('#save-note-icon'))
+    }
 };
 
 export const openNote = function() {
@@ -50,5 +52,6 @@ export const saveNote = function() {
 
     postData("/update-body", updatedNote, () => {});
 
-    saveNote.endFunction()
+    const noteElement = document.querySelector("[data-header='" + referenceHeader + "']");
+    noteElement.dataset.body = newBody
 };

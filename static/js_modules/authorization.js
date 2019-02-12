@@ -39,7 +39,8 @@ const handleServerResponse = function(response) {
         setTimeout(() => {
             hide(document.querySelector('#login-modal-container'));
             hide(document.querySelector('#sign-in-icon'))
-        }, 2000)
+        }, 2000);
+        showModificationOptions()
     } else {
         inputField.placeholder = 'I do not recognise you';
         setTimeout(() => inputField.placeholder = 'Who are you?', 2000);
@@ -55,4 +56,9 @@ const askForPassword = function(inputField) {
 const restoreInputField = function(inputField) {
     inputField.value = '';
     inputField.type = '';
+};
+
+const showModificationOptions = function () {
+    reveal(document.querySelector('#new-note-place'));
+    reveal(document.querySelector('#edit-note-icon'))
 }
