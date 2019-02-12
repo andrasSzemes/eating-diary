@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Select topic</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js" defer></script>
     <script type="module" src="/static/main.js"></script>
 </head>
 <body>
@@ -47,7 +48,7 @@
             <img src="/static/button_icons/save.svg" id="save-note-icon" hidden>
             <p></p>
         </div>
-        <textarea id="note-body" readonly spellcheck="false"></textarea>
+        <div id="note-body" spellcheck="false"></div>
     </div>
     <div id="login-modal-container" hidden>
         <div id="filter"></div>
