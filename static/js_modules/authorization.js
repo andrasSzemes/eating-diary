@@ -38,7 +38,9 @@ const handleServerResponse = function(response) {
         inputField.placeholder = 'Welcome back!';
         setTimeout(() => {
             hide(document.querySelector('#login-modal-container'));
-            hide(document.querySelector('#sign-in-icon'))
+            hide(document.querySelector('#sign-in-icon'));
+            reveal(document.querySelector('#sign-out-icon'));
+            inputField.placeholder = 'Who are you?'
         }, 2000);
         showModificationOptions()
     } else {
@@ -58,7 +60,21 @@ const restoreInputField = function(inputField) {
     inputField.type = '';
 };
 
-const showModificationOptions = function () {
-    reveal(document.querySelector('#new-note-place'));
-    reveal(document.querySelector('#edit-note-icon'))
+const showModificationOptions = function (boolean=true) {
+    if (boolean) {
+        reveal(document.querySelector('#new-note-place'));
+        reveal(document.querySelector('#edit-note-icon'))
+    } else {
+        hide(document.querySelector('#new-note-place'));
+        hide(document.querySelector('#edit-note-icon'))
+    }
+};
+
+export const handleLogout = function () {
+    document.querySelector('#sign-out-icon').addEventListener('click', () => {
+        hide(document.querySelector('#sign-out-icon'));
+        reveal(document.querySelector('#sign-in-icon'));
+        showModificationOptions(false);
+        fetch('/logout')
+    })
 }

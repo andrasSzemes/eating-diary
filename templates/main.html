@@ -8,6 +8,7 @@
 </head>
 <body>
     <img id="sign-in-icon" src="/static/button_icons/sign-in.svg" {{'hidden' if session['hash'] else ''}}>
+    <img id="sign-out-icon" src="/static/button_icons/sign-out.svg" {{'' if session['hash'] else 'hidden'}}>
     <h1>Choose^ A^ Subject^</h1>
     <div id="JS-logo" class="box" data-topic-name="java-script">
         <p class="centralise">JS</p>

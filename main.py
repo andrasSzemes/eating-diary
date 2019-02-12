@@ -59,6 +59,12 @@ def authenticate():
         return jsonify({'OK': False})
 
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return jsonify({'OK': True})
+
+
 if __name__ == '__main__':
     app.secret_key = 'the_one_to_rule_them_all'
     app.run(host='0.0.0.0',
