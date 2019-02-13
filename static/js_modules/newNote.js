@@ -3,11 +3,17 @@ import {postData} from "./utility.js";
 
 
 const createEmptyHeader = function() {
-    event.target.removeEventListener('click', createEmptyHeader);
+    const newNotePlace = event.target;
+    newNotePlace.removeEventListener('click', createEmptyHeader);
 
-    event.target.innerHTML = `
+    newNotePlace.innerHTML = `
         <div class="note"><textarea class="new-note-textarea" spellcheck="false"></textarea></div>`;
-    event.target.querySelector('textarea').focus()
+    newNotePlace.querySelector('textarea').focus();
+
+    newNotePlace.querySelector('textarea').addEventListener('blur', () => {
+        newNotePlace.innerHTML = '';
+        newNotePlace.addEventListener('click', createEmptyHeader)
+    })
 };
 
 const numberOfSubtopicNotes = function() {
