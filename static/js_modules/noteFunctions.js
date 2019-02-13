@@ -36,7 +36,7 @@ export const openNote = function() {
 
     const noteBody = document.querySelector('#note-body');
     noteBody.dataset.markdown = clickedNote.dataset.body ? clickedNote.dataset.body : clickedNoteText.dataset.body;
-    noteBody.innerHTML = clickedNote.dataset.body ? converter.makeHtml(clickedNote.dataset.body) : converter.makeHtml(clickedNoteText.dataset.body);
+    noteBody.innerHTML = converter.makeHtml(noteBody.dataset.markdown).replace(/&amp;nbsp;/g, ' ');
 
     reveal(document.querySelector('#opened-note'))
 };
@@ -63,5 +63,5 @@ export const saveNote = function() {
 
     const noteBody = document.querySelector('#note-body');
     noteBody.dataset.markdown = newBody;
-    noteBody.innerHTML = converter.makeHtml(noteBody.dataset.markdown)
+    noteBody.innerHTML = converter.makeHtml(noteBody.dataset.markdown).replace(/&amp;nbsp;/g, ' ')
 };
