@@ -19,6 +19,7 @@ const createNewSubtPlace = function () {
     const newSubtopicPlace = document.createElement('div');
     newSubtopicPlace.id = 'new-subtopic-place';
     newSubtopicPlace.setAttribute('spellcheck', 'false');
+    newSubtopicPlace.setAttribute('hidden', '');
 
     return newSubtopicPlace
 };

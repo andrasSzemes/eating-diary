@@ -63,10 +63,12 @@ const restoreInputField = function(inputField) {
 const showModificationOptions = function (boolean=true) {
     if (boolean) {
         reveal(document.querySelector('#new-note-place'));
-        reveal(document.querySelector('#edit-note-icon'))
+        reveal(document.querySelector('#edit-note-icon'));
+        reveal(document.querySelector('#new-subtopic-place'))
     } else {
         hide(document.querySelector('#new-note-place'));
-        hide(document.querySelector('#edit-note-icon'))
+        hide(document.querySelector('#edit-note-icon'));
+        hide(document.querySelector('#new-subtopic-place'))
     }
 };
 
