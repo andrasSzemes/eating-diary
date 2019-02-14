@@ -45,6 +45,13 @@ def add_new_note_header():
     return jsonify({'OK': False})
 
 
+@app.route('/add-new-subtopic', methods=['POST'])
+def add_new_subtopic():
+    new_data = request.get_json()
+    data_manager.add_new_subtopic(new_data)
+    return jsonify({'OK': True})
+
+
 @app.route('/authenticate', methods=['POST'])
 def authenticate():
     userdata = request.get_json()

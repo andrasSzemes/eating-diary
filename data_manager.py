@@ -75,7 +75,27 @@ def add_new_note_header(cursor, new_data):
                     VALUES (%(new_header)s, %(subtopic_id)s, %(position)s);
                     """,
                    new_data)
-    print(time.time())
+
+
+@connection.connection_handler
+def add_new_subtopic(cursor, new_data):
+    new_data['next_id'] = get_last_subtopic_id() + 1
+    cursor.execute("""
+                    INSERT INTO subtopics
+                    (subtopic_id, subtopic_name, topic_name, subtopic_name_as_link)
+                    VALUES (%(next_id)s, %(subtopic_name)s, %(topic_name)s, %(subtopic_name_as_link)s)
+                    """,
+                   new_data)
+
+
+@connection.connection_handler
+def get_last_subtopic_id(cursor):
+    cursor.execute("""
+                    SELECT MAX(subtopic_id) AS max
+                    FROM subtopics
+                    """)
+
+    return cursor.fetchone()['max']
 
 
 @connection.connection_handler
